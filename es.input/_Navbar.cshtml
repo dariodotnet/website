@@ -1,0 +1,24 @@
+@{
+    var pages = new Dictionary<string, string>
+    {
+        { "Blog", Context.GetLink("blog") },
+        { "Training", Context.GetLink("training") },
+        { "Book", Context.GetLink("book") },
+        { "Documentación", Context.GetLink("docs") },
+        { "API", Context.GetLink("api") },
+        { "Contribuye", Context.GetLink("contribute") },
+        { "Soporte", Context.GetLink("support") },
+    };
+
+    foreach(var page in pages)
+    {
+        var activeClass = Context.GetLink(Document).StartsWith(page.Value) ? "active" : null;
+        <li class="@activeClass"><a href="@page.Value">@Html.Raw(page.Key)</a></li>
+    }
+
+    <li>
+        <a class="github" href="https://github.com/reactiveui/reactiveui">
+            <img src="@Context.GetLink("/assets/img/GitHub-Mark-32px.png")" alt="GitHub" />
+        </a>
+    </li>
+}

@@ -1,0 +1,53 @@
+Title: Documentation
+---
+
+@{ 
+    // nb. I have no doubt this framework will be around in 20 years. To whomever is maintaining
+    // this code in 2038 - hit me up and I'll buy you a beer - Geoff.
+    var numbers = new []{ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+
+    var inception = 2009;
+    var years = DateTime.Now.Year - inception;
+    var projectAge = numbers[years];
+}
+
+
+<p>ReactiveUI es un framework MVVM(model-view-viewmodel) modular y multi-plataforma para toda la plataforma .NET e inspirada en la programción funcional reactiva (FRP), un paradigma que permite expresar la idea acerca de una funcionalidad de modo legible, abstrayendo el estado de la interfaz de usuario y mejorando la capacidad de tests de nuestra aplicación.</p>
+
+<p>Es el padre del popular framework <a href="https://github.com/ReactiveCocoa/">ReactiveCocoa</a>. Internamente, los colaboradores debaten sobre si ReactiveUI es o no un framework, ya que en su esencia el core del proyecto son un puñado de métodos para las Reactive Extensions.  El proyecto lo empezó @projectAge hace años por Paul Betts y ahora ya tiene edad para ir al instituto, pero a diferencia de un adolescente, es muy estable y ha madurado con el paso de los años y es una opción sólida para desarrollar tu próxima aplicación. <a href="https://github.com/reactiveui/ReactiveUI/issues/979#issuecomment-196735701" target="_blank">Slack uses us, as does GitHub, Amazon , Elastic &amp; Microsoft</a>.</p>
+
+<p>Creemos que el código es la comunicación entre personas que también se eejectura en un ordenador. Si optomizas para humanos, entonces su proyecto terminará siendo mejor. El software debe ser comprensible para las personsas y esto es lo más impoertante. Creemos que sólo <a href="https://www.youtube.com/watch?v=5DZ8nC0ENdg" target="_blank">el poder de las Reactive Extensions te permite expresar la idea acerca de una característica legible en un único lugar</a>.</p>
+
+<p>Suponagmos que tiene un campo de texto y cuando el usuario escribe algo dentro, quiere hacer una búsqueda a través de la red. Su diseñador le ha solicitado que la búsqueda se ejecute automatócamente a medida que el usuario escribe pero el equipo de operaciones quiere garantizar que sólo haya una solicitud y con una frecuencia no inferior a un segundo mientras el usuario escribe.</p>
+
+<img src="search-autocomplete.gif" />
+
+<h1>How would you usually implement this?</h1>
+
+<h1>¿Cómo solemos implementar esto?</h1>
+
+<p>La programación moderna a día de hoy es básicamente imperativa, lo que significa que modela el ciclo tradicional de ejecución de una CPU. Realiza una instrucción, trae la siguiente. Realiza otra y así sucesivamente. Durante decadas, los programadores han tenido que moldear sus cerebros para adaptarse al paradigma de la CPU. Ha sido así desde principios de los 80.</p>
+
+<p>Cuando nos basamos en la esperanza de que el comportamiento que surge de un programa es correcto, y que la confianza sólo se basa en la corrección de un programador, entonces podemos encontrarnos fácilmente en una situación difícil. Podemos tratar de mitigar los costos de programación imperativa con cosas como tests unitarios o tests de integración, pero ¿por qué mitigar los costos cuando hay una mejor manera?</p>
+
+<h1>Hay una forma mejor</h1>
+
+<p>Hace mucho tiempo, cuando surgió la programación de ordenadores, las máquinas tenían que programarse manualmente. Si el técnico introducía la secuencia correcta de código máquina y en el orden correcto, entonces el comportamiento del programa resultante cumplía los requisitos del negocio.  En lugar de decirle a un ordenador cómo hacer su trabajo, que es propenso a errores y depende demasiado de la infalibilidad del programador, ¿por qué no le decimos cuál es su trabajo y dejamos que resuelva el resto?</p>
+
+<p>ReactiveUI se inspira en el paradigma de la Programación Reactiva Funcional (FRP), que permite modelar la entrada del usuario como una función que cambia con el tiempo. Esto es alucinante porque le permite abstraer el estado mutable de sus interfaces de usuario y expresar la idea alrededor de una característica en un lugar legible mientras mejora la testeabilidad de la aplicación. La programación reactiva puede parecer aterradora y compleja a primera vista, pero la mejor manera de describir la programación reactiva es pensar en una hoja de cálculo:</p>
+
+<br/>
+<img src="frp-excel.gif" />
+<br/>
+
+<br />
+
+<ul>
+    <li>Tres celdas, A, B, y C.</li>
+    <li>C se define como la suma de A más B.</li>    
+    <li>Cuando A o B cambia, C reacciona actualizándose.</li>
+</ul>
+
+<p>Esto es programación reactiva: los cambios se propagan a través de un sistema autmáticamente. Bienvenido al mejor paradigama de programación.</p>
+
+<iframe width="100%" height="480" src="https://www.youtube.com/embed/DYEbUF4xs1Q" frameborder="0" allowfullscreen></iframe>
