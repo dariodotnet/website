@@ -1,50 +1,32 @@
 Title: Código de conducta
 ---
-If you’re being harassed, noticed someone else being harassed, or have any other concerns, please [contact us immediately](mailto:hello@reactiveui.net). Your reports will be taken seriously and will not be dismissed or argued with. All members, committers and volunteers in this community are required to act according to the Code of Conduct. These guidelines help steer our interactions and strive to keep ReactiveUI a positive, growing project, community and help us provide and ensure a safe environment for everyone. When referring to a group of people, we aim to use gender-neutral terms like "team", "folks", "everyone". (For details, we recommend [this post](https://modelviewculture.com/pieces/gendered-language-feature-or-bug-in-software-documentation)).</p>
 
-As contributors and maintainers of this project, and in the interest of
-fostering an open and welcoming community, we pledge to respect all people who
-contribute through reporting issues, posting feature requests, updating
-documentation, submitting pull requests or patches, and other activities.
+Si estás siendo acosado, o sabe que alguien está siendo acosado, o tienes alguna otra inquietud,
+por favor, [contacta con nosotros inmediatamente](mailto:hello@reactiveui.net). Tus reposrtes será tratados seriamente y no será eliminado. Todos los miembros, comprometidos y voluntarios en esta comunidad son instados a actuar acorde al Código de conducta. Estas líneas básicas ayudan a dirigir nuestras interacciones y esforzarnos a matener ReactiveUI de manera positiva, como proyecto y comunidad en creciemiento y ayudarnos a proveer y asegurar un entorno seguro para todos. Cuando nos refereimos a un grupo de personas, nos proponemos utilizar términos de género neutral como "equipo", "compañeros", "todos". (Para más detalles, recomendamos [este artículo](https://modelviewculture.com/pieces/gendered-language-feature-or-bug-in-software-documentation)).</p>
 
-We are committed to making participation in this project a harassment-free
-experience for everyone, regardless of level of experience, gender, gender
-identity and expression, sexual orientation, disability, personal appearance,
-body size, race, ethnicity, age, religion, or nationality.
+Como contribuyentes y gestores del proyecto y en interés de alimentar una comunidad abierta y de buen recibimiento, prometemos respetar a todo el mundo que contribuye reportando errores, solicitando nuevas características, actualizado la documentación, enviando pull requests o correcciones y otras actividades.
 
-Examples of unacceptable behavior by participants include:
+En este proyecto estamos comprometidos en tener una experiencia libre de acosos para toda la cumunidad, independientemente del nivel de experiencia, género, identidad y expresión de género, orientación sexual, minusvalía, apariencia personal, tamaño del cuerpo, raza, étnia, edad, religión o nacionalidad.
 
-* The use of sexualized language or imagery
-* Personal attacks
-* Trolling or insulting/derogatory comments
-* Public or private harassment
-* Publishing other's private information, such as physical or electronic
-  addresses, without explicit permission
-* Other unethical or unprofessional conduct
+Como ejemplos de comportamientos inaceptables de los participantes se incluye:
 
-Project maintainers have the right and responsibility to remove, edit, or
-reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, or to ban temporarily or
-permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
+* El uso de un lenguaje sexualizado o imaginario.
+* Ataques personales
+* Troleos o insultos/comentarios despectivos
+* Acoso público o privado
+* Publicación de información privada de otros, como dirección física o electrónica sin un permiso explícito.
+* Otras conductas no profesionales o sin ética.
 
-By adopting this Code of Conduct, project maintainers commit themselves to
-fairly and consistently applying these principles to every aspect of managing
-this project. Project maintainers who do not follow or enforce the Code of
-Conduct may be permanently removed from the project team.
+Los gestores del proyecto tienen el derecho y la responsabilidad de eliminar, editar o rechazar comentarios, commits, código, ediciones de wiki, errores y otras contribuciones que no estén alineadas con este Código de Conducata o expilsar temporal o permanentemente a cualquier contribuyente por otros comportamientos que ellos consideren inapropiado, amenazante, ofensivo o dañino.
 
-This Code of Conduct applies both within project spaces and in public spaces
-when an individual is representing the project or its community.
+Aceptando este Código de Conducta, los gestores del proyecto se compromentes a aplicar estos principos de un modo seguro y consistente en la gestión del mismo. Los gestores del proyecto que no sigan o refuerzen el Código de Conducata pueden ser apartados permanentemente del quipo de gestión.
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting a project maintainer at hello@reactiveui.net. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. Maintainers are
-obligated to maintain confidentiality with regard to the reporter of an
-incident.
+El Código de Conducta aplica en los casos de espacio público y cuando de modo individual se represente al proyecto o la comunidad.
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage],
-version 1.3.0, available at
+Abusos, acosos o cualquier otro comportamiento inaceptable puede ser reportado contactando con los gestores del proyecto en hello@reactiveui.net. Todos los casos recibidos serán reivsados, investigados y contestados de un modo apropiado a las circunstancias. Los gestores están obligados a mantener la confidencialidad cuidando al remitente o al incidente.
+
+El Código de Conducta es adoptado desde el [Contributor Covenant][homepage],
+version 1.3.0, disponible en
 [http://contributor-covenant.org/version/1/3/0/][version]
 
 [homepage]: http://contributor-covenant.org
