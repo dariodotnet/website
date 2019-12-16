@@ -12,19 +12,19 @@ Title: Subscriptions
 
 # Lifecycle
 
-The default behavior of the Observable operators is to dispose of the subscription as soon as possible (i.e, when an OnCompleted or OnError messages is published) _but need to consider sequences that never terminate (by OnCompleted or OnError)_
+El comportamiento por defecto de los operadores Observable es hacer un dispose de las subscripciones tan pronto como sea posible (i.e. cuando un mensaje OnCompleted o OnError es publicado) _ pero necesitas considerar que la secuencia nunca terman (por OnCompleted o OnError)_
 
-If you call a Subscribe method and ignore the return value, you have lost your only handle to unsubscribe. The subscription will still exist, and you have effectively lost access to this resource, which could result in leaking memory and running unwanted processes.
+Si llamas al método Subscribe e ignoras el valor devuelto, estás perdiendo la posibilidad de desuscribirte. La subscripción quedará activa y efectivamente pierdes el acceso a este recurso, el cual podría resultar en un memory leak y seguir procesando procesos no esperados.
 
-The Subscribe method returns an IDisposable, so that you can unsubscribe to a sequence and dispose of it easily. When you invoke the Dispose method on the observable sequence, the observer will stop listening to the observable for data.
+El método Subscribe devuelve un IDisposable, por lo que te puedes desuscribir y hacer un dispose de manera sencilla. Cuando llamas al método Dispose de una sequencia observable, el observador parará de escuchar los datos del observable.
 
-> Many people who hear about the Dispose pattern for the first time complain that the GC isn't doing its job. They think it should collect resources, and that this is just like having to manage resources as you did in the unmanaged world. The truth is that the GC was never meant to manage resources. It was designed to manage memory and it is excellent in doing just that. - [Krzysztof Cwalina](http://blogs.msdn.com/b/kcwalina/) from [Joe Duffy's blog](http://www.bluebytesoftware.com/blog/2005/04/08/DGUpdateDisposeFinalizationAndResourceManagement.aspx).
+> Muchas gente ha oído hablar del patrón Dispose como un primer complemento para cuando el GC no está haciendo su trabajo. Piensan que deberíam recoger recursos y que esto es justo lo que harías en un mundo no maejado. Lo cierto es que el GC nunca tuvo la intención de maejar recursos. Fue diseñado para manejar la memoria y es excelente haciéndolo. - [Krzysztof Cwalina](http://blogs.msdn.com/b/kcwalina/) from [Joe Duffy's blog](http://www.bluebytesoftware.com/blog/2005/04/08/DGUpdateDisposeFinalizationAndResourceManagement.aspx).
 
-You can use the IDisposable interface for more than the common use of deterministically releasing unmanaged resources. It is a useful tool for managing lifetime or scope of anything. 
+Puedes utilizar la interface IDisposable para algo más que el uso común de determinar cuando finalizamos recursos no majados. Esto es una herramienta muy útil para manejar el tiempo de vida o el alcance de cualquier cosa.
 
-ReactiveUI provides you with  [WhenActivated](/docs/handbook/when-activated) to help manage lifecyle and the Reactive Extensions provides several different options to help you with managing [lifetime, scope and resources](disposables).
+ReactiveUI te provee con [WhenActivated](/docs/handbook/when-activated) que te ayuda a maneja el ciclo de vida y las Reactive Extensions te proveen de diferentes opciones que te ayudan a manejar [lifetime, scope and resources](disposables).
 
-## See Also
+## Ver también
 
 * https://msdn.microsoft.com/en-us/library/hh242977(v=vs.103).aspx
 * http://www.introtorx.com/content/v1.0.10621.0/03_LifetimeManagement.html

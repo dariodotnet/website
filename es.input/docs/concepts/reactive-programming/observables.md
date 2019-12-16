@@ -1,11 +1,9 @@
 Order: 5
 ---
 
-Users expect real time data. They want their tweets now. Their order confirmed now. They need prices accurate as of now. Their online games need to be responsive. As a developer, you demand fire-and-forget messaging. You don't want to be blocked waiting for a result. You want to have the result pushed to you when it is ready. Even better, when working with result sets, you want to receive individual results as they are ready. You do not want to wait for the entire set to be processed before you see the first row. The world has moved to push; users are waiting for us to catch up. Developers have tools to push data, this is easy. Developers need tools to react to push data.
+Los usuarios esperan datos en tiempo real. Quieren sus tweets ahora. Quiere confirmar el pedido ya. Necesitan precios específicos actualizados. Sus juegos online necesitan ser responsivos. Como desarrolladores, demandas la opción de dispara-y-olvida. No quieres quedarte bloqueado esperando un resultado. Quieres tener el resultado cuando esté listo. Todavía mejor, cuando trabajamos con conjuntos de resultados, quieres recibirlos individualmente cuando estén listos. No quieres esperar a que todo el conjunto sea procesado antes de que puedas ver el primero. El mundo se ha movido al ya; los usuarios esperan que lo hagamos. Los desarrolladores tienen herramientas para hacerlo, es fácil. Los desarrolladores necesitan herramientas para reaccionar.
 
-Rx and specifically IObservable<T> is not a replacement for IEnumerable<T>. I would not recommend trying to take something that is naturally pull based and force it to be push based.
+Rx y específicamente IObservable<T> no es un reemplazo para IEnumerable<T>. No recomendaría intentar tener algo que es naturalmente para esperar y forzarlo a que sea para activar.
 
-Translating existing IEnumerable<T> values to IObservable<T> just so that the code base can be "more Rx"
-Message queues. Queues like in MSMQ or a JMS implementation generally have transactionality and are by definition sequential. I feel IEnumerable<T> is a natural fit for here.
-By choosing the best tool for the job your code should be easier to maintain, provide better performance and you will probably get better support.
-
+Traduciendo un IEnumerable<T> existente a valores IObservable<T> es hacer que nuestro código pueda ser "más Rx" con mensajes encolados. Las colas, como en MSMQ o una implementación general de JMS tienen transaccionalidad y son por definición secuenciales. Siento que IEnumerable<T> se ajusta de un modo más natural.
+Por difinición la mejor herramienta para trabajar con tu código debería ser sencillo de mantener, proveer mejor rendimiento y probablemente tener mejor soporte.

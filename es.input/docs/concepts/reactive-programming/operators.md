@@ -1,15 +1,17 @@
 # Do
 
-Use it to inspect a pipeline without side effects. Great for logging and debugging.
+Utilízalo para inspeccionar un sucesión de funciones sin afectarlas. Estupendo para hacer seguimiento o debugging.
 
 # Where
 
-Watch "why you should be making better apps with Reactice Programming" Xamarin Evolve video.
+Mira el vídeo "why you should be making better apps with Reactice Programming" de Xamarin Evolve.
 
-Where fish is not a shrimp.
+https://www.youtube.com/watch?v=DYEbUF4xs1Q
+
+Donde un pescado no es un camarón.
 
 # Merge
 
-Handle multuple chickens layijg eggs, make pancakes
+Maeja múltiples gallinas poniendo huevos para hacer un pastel.
 
 https://www.eightbot.com/single-post/2017/08/10/Merging-IObservableEgg

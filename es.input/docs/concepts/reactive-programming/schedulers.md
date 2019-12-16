@@ -4,22 +4,20 @@ Title: Schedulers
 
 .https://staltz.com/primer-on-rxjs-schedulers.html
 
+Un par de cosas que deberías ser de ayuda, RxUI tiene algunas métodos de ayuda para complementar los schedulers y se los puedes pasar así ImmediateScheduler.Instance - esto es porque limita la acción y deja de compartir schedulers entre pruebas.
 
-Couple of things that might be helpful, RxUI has some helpers to wrap the schedulers up, and you can just pass ImmediateScheduler.Instance into them - this is neat because it limits the scope and stops you sharing schedulers between tests.
-
-You'll need the Testing package, and then can do, e.g.
+Necesitarás el paquete de Testing y entonces podrás hacer, e.g.
 ```
 using(TestUtils.WithScheduler(ImmediateScheduler.Instance)){
  // your test here
 }
 ```
-docs are here https://reactiveui.net/api/reactiveui.testing/testutils/949c3f58
+documentación aquí https://reactiveui.net/api/reactiveui.testing/testutils/949c3f58
 
-(internally, this does what you're doing anyway, but it does tidy up after itself)
+(internamente, esto hace lo que tiene que hacer en todo momento, pero después se ordena a si mismo)
 
-The other thing that we use in some tests (e.g. if you're wanting to check whether the observable flips between some values during a few scenarios) is `CreateCollection`, e.g. https://github.com/reactiveui/ReactiveUI/blob/develop/src/ReactiveUI.Tests/ReactiveCommandTest.cs#L35
+Otra cosa que utilizamos en otras pruebas (e.g. si estás esperando el cambio de valor de un observable durante algunos escenarios) es `CreateCollection`, e.g https://github.com/reactiveui/ReactiveUI/blob/develop/src/ReactiveUI.Tests/ReactiveCommandTest.cs#L35
 
+La ventaja de este modo es que puedes jugar con el scheduler, lo cual es fantástico si estás utilizando un `TestSheduler`porque no te tienes que preocupar de irlos ordenando por tu cuenta (e.g. (new TestScheduler().With(sched => {}));)
 
-The advantage of the that way is you get the scheduler to play with, which is nice if you're using a `TestScheduler` because you don't have to worry about tidying up after yourself (e.g. (new TestScheduler()).With(sched=>{});)
-
-Each _thread_ has its own set of test schedulers that the `With` extension manages for you. This means that even if your tests run asynchronously, they will in theory not stomp on each other's schedulers.
+Cada _thread- tiene su propio scheduler asignado y es la extensión `With` la que lo maneja por ti. Esto signifinca que si tus pruebas son asíncronas, en teoría los schedulers no se pisarán entre ellos.
