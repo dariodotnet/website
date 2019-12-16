@@ -1,10 +1,10 @@
-# Visual Studio Settings
+# Ajustes de Visual Studio
 
-## Disable Just My Code
-In settings of Visual Studio, disable the [Just My Code](https://msdn.microsoft.com/en-us/library/dn457346.aspx) feature _forever and ever_. Trust us on this one, it makes the debugging experience for `Observable` and `async/await/TPL` _so much better_.
+## Desactiva Just My Code
+En los ajustes de Visual Studio, desactiva [Just My Code](https://msdn.microsoft.com/en-us/library/dn457346.aspx) _para siempre_. Créenos en esto, hará tu experiencia en debuggin para `Observable` y `async/await/TPL`_mucho mejor_.
 
-## Enable Stop on First Chance Exceptions
-This is like Rx debugging pro-tip #1:
+## Activa Stop on First Chance Exceptions
+Esto es como Rx debugging pro-tip #1:
 
 http://blogs.msdn.com/b/davidklinems/archive/2005/07/18/440150.aspx
 

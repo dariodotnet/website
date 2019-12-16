@@ -1,6 +1,6 @@
-# Enable Framework Logging
+# Activa Framework Logging
 
-Debug information is written by the framework to Splat. By default, [splat ships with a null logger as "Debug.WriteLine" is stripped by the compiler when Splat is packaged](https://github.com/reactiveui/splat/issues/46). Wire in an implementation of `ILogger` such as the one below to see these messages:
+La información de Debug es escrita por el framework a Splat. Por defecto, [splat se envía con un looger nulo como "Debug.WriteLine" eliminado por el compilador cuando Splat es empaquetado](https://github.com/reactiveui/splat/issues/46). Escribe una implementación de `ILogger` como la de abajo para ver los mensajes:
 
 ```csharp
 public class LoggingService : ILogger
@@ -29,7 +29,7 @@ public class LoggingService : ILogger
 }
 ```
 
-Then at your composition root, register your implementation
+Entonces en la raiz de tu composición, registra tu implementación
 
 ```csharp
 public void ConfigureLogging()

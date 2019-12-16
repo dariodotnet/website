@@ -1,5 +1,5 @@
 # Visual Studio for Mac
 
-This is like Rx debugging pro-tip #1:
+Esto es como Rx debugging pro-tip #1:
 
-Under the `Breakpoints` pad, click `New Exception Catchpoint` and just enter `System.Exception` as the exception to break on. Exceptions w/subscriptions terminate the subscription. They tick "onError" instead of "onNext" or "onCompleted". This allows you to hook and figure out before "onError" ticks.
+En las opciones de `Breackpoints`, click en `New Exception Catchpoint` y teclea `System.Exception` para activarlo. Las excepciones con subscripciones terminan la subscripción. Estos ejecutar "onError" en lugar de "onNext" o "onCompleted". Esto te permite capturar e imaginar antes de lanzarse "onError".

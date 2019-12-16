@@ -1,11 +1,12 @@
 # Debugging Symbols
 
-We use [GitLink](https://github.com/Gittools/GitLink) instead of shipping symbols so that you don't have to specify custom symbol servers (such as symbolsource.org).
+Utilizamos [GitLink](https://github.com/Gittools/GitLink) en lugar de enviar símbolos por lo que no 
+tienes que epecificar un servidor de símbolos específico (como symbolsource.org).
 
 ![We use GitLink](/images/getting-started/git-link.gif)
 
-The only requirement is to ensure the check the `Enable source server support` option in Visual Studio as shown below:
+El único requerimiento es asegurarse de activar en Visual Studio la opción `Enable source server support` como se muestra a continuación:
 
-![Configure Visual Studio as follows](/contribute/maintainers/gitlink-visualstudio-enablesourceserversupport.png)
+![Configura Visual Studio de este modo](/contribute/maintainers/gitlink-visualstudio-enablesourceserversupport.png)
 
-Refer to [this guide if you experience problems](https://github.com/GitTools/GitLink#troubleshooting).
+Ve a [esta guía si tienes algún problema](https://github.com/GitTools/GitLink#troubleshooting).
