@@ -1,42 +1,42 @@
 Order: 10
 ---
 
-A big part of understanding ReactiveUI is understanding Reactive Programming. As ReactiveUI is a library built on `Reactive Extension for .NET`. It's a bunch of extension methods for programming in a reactive manner. Here are some steps to begin with:
-- Create a net45 console app, install Akavache, use getandfetchlatest, pass in a Task to grab http content (for example use http://swapi.co/ for testing purpose), subscribe to it and observe how a async value returns multiple times. Unlike tasks, observables represent one or more values over time whilst you subscribe.
-- Then next step move onto reactive programming disposables/subscriptions
-- Then look at whenacticated (reactive UI) and disposing subscriptions (reactive programming)
-- Now create a ViewModel (reactiveobject) that replicates your learning from the console app and plug that into the datacontext of your Xamarin forms app. Do everything else (for now) exactly how you normally would.
+Una parte importante para entender ReactiveUI es entender la Programación Reactiva. ReactiveUI es una librería construida con `Reactive Extensions for .NET`. Es un conjunto de métodos de extensión para permitir una programación reactiva. Aquí tienes unos pasos para comenzar:
+- Crea una app de consola net45, instala Akavache, utilizar getandfetchlatest, pasa una Task para grabar contenido (por ejemplo http://swapi.co/ para probar), subscríbete y observa como los valores asíncronos son retornados. Al contratio que las tasks, los observables representan uno o más valores a lo largo del tiempo de la suscripción
+- El siguiente paso es moverte a la programación reactiva disposables/subscriptions
+- Entonces mira whenactivated (reactive UI) y haz dispose de tus subscripciones (programación reactiva)
+- Ahora crea un ViewModel (reactiveobject) que replica lo que has aprendido desde la aplicación de consola y conéctalo al datacontext de tu aplicación Xamarin Forms. Haz esto mismo (por ahora) como lo harías normalmente.
 
-You now know ReactiveUI, but not yet proficient in expressing yourself in an reactive manner/cleanly.
-Next step is [OAPH](https://reactiveui.net/docs/handbook/oaph/), [WhenAny](https://reactiveui.net/docs/handbook/when-any/) and [Reactive Command](https://reactiveui.net/docs/handbook/commands/). This is optional but you get immense power out of mastery of these.
+Ahora conoces ReactiveUI, pero todavía no de un modo eficiente explresado por ti mismo y de modo reactivo y limpio.
+El siguiente paso es [OAPH](https://reactiveui.net/docs/handbook/oaph/), [WhenAny](https://reactiveui.net/docs/handbook/when-any/) y [Reactive Command](https://reactiveui.net/docs/handbook/commands/). Esto es opcional, pero verás el inmenso poder de éste.
 
-# Example ViewModel
+# Ejemplo de ViewModel
 
-Let's create a simple application demonstrating a number of ReactiveUI functionalities, without getting into too many under-the-hood details. 
+Vamos a crear una aplicación simple demostrando un número de funcionalidades de ReactiveUI, sin entrar en mucho detalle.
 
-We will create a WPF application, which will allow us to search through Flickr public images.   
-The full code of the application is shown at the end of this chapter, and we will show relevant snippets as we go.
+Crearemos una aplicación WPF, la cual nos permitirá buscar sobre las imágenes públicas de Flickr.
+El código completo de la aplicación se muestra al final de este copítulo y mostrará algunas pinceladas relevantes.
 
-In Visual Studio create a new WPF application (.Net 4.5 or above)
+En Visual Studio, crea una nueva aplicación WPF (.Net 4.5 o superior)
 
-Our view has been already created for us, the `MainWindow`, so we will proceed with creating our ViewModel.
+Nuestra vista ha sido creada para nosotros, la `MainWindow`, procedamos a crear nuestro ViewModel.
 
-**Add references**
+**Añade referencias**
 ```csharp
 using System.Web;
 ```
 
-**Add NuGet Packages**
+**Añade NuGet Packages**
 ```
 Install-Package ReactiveUI
 ```
 
-**Add a new field**
+**Añade una nueva propiedad**
 ```csharp
 public AppViewModel ViewModel { get; private set;} 
 ```
 
-**Then assign it a new value inside the MainWindow constructor, and bind this to the DataContext**
+**Ahora asignale un nuevo valor dentro del constructor de MainWindow y haz bind al DataContext**
 
 ```csharp
 public MainWindow()
@@ -47,17 +47,16 @@ public MainWindow()
 }  
 ```
 
-**Create a new class "AppViewModel"**
+**Crea una nueva class "AppViewModel"**
 ```csharp
-// AppViewModel is where we will describe the interaction of our application
-// (we can describe the entire application in one class since this is very 
-// small). 
+// AppViewModel es donde describiremos la interacción de nuestra aplicación
+//(podemos describir en una única class cuando nuestra aplicación es muy pequeña)
 public class AppViewModel : ReactiveObject
 {
-    // In ReactiveUI, this is the syntax to declare a read-write property
-    // that will notify Observers (as well as WPF) that a property has 
-    // changed. If we declared this as a normal property, we couldn't tell 
-    // when it has changed!
+    // En ReactiveUI, esta es la sintáxis para declarar una propiedade de lectura-escritura
+    // que notificará a los Observers (también como WPF) que la propiedad
+    // ha cambiado. Si declaramos ésta como una propiedad normal, no podremos
+    // saber cuando ésta cambie!
     string _SearchTerm;
     public string SearchTerm
     {
@@ -65,30 +64,31 @@ public class AppViewModel : ReactiveObject
         set { this.RaiseAndSetIfChanged(ref _SearchTerm, value); }
     }
 
-    // We will describe this later, but ReactiveCommand is a Command
-    // (like "Open", "Copy", "Delete", etc), that manages a task running
-    // in the background.
+    // Describiremos esto después, pero ReactiveCommand es un Command
+    //(como "Open", "Copy", "Delete", etc), que maneja una task corriendo
+    // en background
     public ReactiveCommand<string, List<FlickrPhoto>> ExecuteSearch { get; protected set; }
 
-    /* ObservableAsPropertyHelper
-     * 
-     * Here's the interesting part: In ReactiveUI, we can take IObservables
-     * and "pipe" them to a Property - whenever the Observable yields a new
-     * value, we will notify ReactiveObject that the property has changed.
-     * 
-     * To do this, we have a class called ObservableAsPropertyHelper - this
-     * class subscribes to an Observable and stores a copy of the latest value.
-     * It also runs an action whenever the property changes, usually calling
-     * ReactiveObject's RaisePropertyChanged.
+    /*ObservableAsPropertyHelper
+     *
+     * Aquí tenemos algo interesante: En ReactiveUI podemos tomar IObservables
+     * y sus modificaciones para asignarlos a una Propiedad - cada vez que el Observable
+     * tome un nuevo valor, notificaremos que a nuestro ReactiveObject que la 
+     * propiedad ha cambiado
+     *
+     * Para hacerlo, necesitamos una clase llamada ObservableAsPropertyHelper -
+     * esta clase se subscribe a un Observable y almacena una copia de los últimos
+     * valores. Esto también lanza una acción cada vez que la propiedad cambia,
+     * usualmente llamando a ReactiveObject's RasiePropertyChanged.
      */
     ObservableAsPropertyHelper<List<FlickrPhoto>> _SearchResults;
     public List<FlickrPhoto> SearchResults => _SearchResults.Value;
 
-    // Here, we want to create a property to represent when the application 
-    // is performing a search (i.e. when to show the "spinner" control that 
-    // lets the user know that the app is busy). We also declare this property
-    // to be the result of an Observable (i.e. its value is derived from 
-    // some other property)
+    // Aquí, queremos crear una propiedad que represente cuando la aplicación
+    // está realizando una búsqueda (i.e cuando mostrar el control "spinner"
+    // que permite al usuario saber que la aplicación está ocupada). También 
+    // declaramos esta propiedad para ser el resultado de un Observable (i.e 
+    // es el valor derivado desde alguna otra propiedad)
     ObservableAsPropertyHelper<Visibility> _SpinnerVisibility;
     public Visibility SpinnerVisibility => _SpinnerVisibility.Value;
 
@@ -98,30 +98,31 @@ public class AppViewModel : ReactiveObject
             searchTerm => GetSearchResultsFromFlickr(searchTerm)
         );
 
-        /* Creating our UI declaratively
-         * 
-         * The Properties in this ViewModel are related to each other in different 
-         * ways - with other frameworks, it is difficult to describe each relation
-         * succinctly; the code to implement "The UI spinner spins while the search 
-         * is live" usually ends up spread out over several event handlers.
+        /* Creando nuestra UI de modo declarativo
          *
-         * However, with RxUI, we can describe how properties are related in a very 
-         * organized clear way. Let's describe the workflow of what the user does in
-         * this application, in the order they do it.
+         * Las propiedades en este ViewModel están relacionadas unas con otras de 
+         * un modo diferente a otros frameworks, es dificil describir cada relación
+         * sencillamente; el código para implementar "Controlar que nuestro "spinner" 
+         * está activo mientras la búsqueda se realiza" normalmente nos lleva a tener
+         * que manejar un montón de eventos
+         *
+         * Sin embargo, con RxUI, podemos describir como las propiedades están relacionadas
+         * de un modo mas organizado y limpio. Nos permite describir cómo el usuario las
+         * está utilizando en nuetra aplicación, en el orden que lo hacen.
          */
 
-        // We're going to take a Property and turn it into an Observable here - this
-        // Observable will yield a value every time the Search term changes (which in
-        // the XAML, is connected to the TextBox). 
+        // Vamos a tomar una propiedad y convertirla en Observable aquí - este
+        // Observable devolverá un valor cada vez que Search term cambie (la cual 
+        // está en XAML, conectara al TextBox). 
         //
-        // We're going to use the Throttle operator to ignore changes that 
-        // happen too quickly, since we don't want to issue a search for each 
-        // key pressed! We then pull the Value of the change, then filter 
-        // out changes that are identical, as well as strings that are empty.
+        // Vamos a utilizar el operador Throttle para ignorar cambios que 
+        // ocurren demasiado rápido, ya que no queremos problemas por buscar
+        // con cada tecla presionada! Entonces recuperamos el Value del cambio, 
+        // filtramos los cambios que son idénticos y también cuando string está vacío.
         //
-        // Finally, we use RxUI's InvokeCommand operator, which takes the String 
-        // and calls the Execute method on the ExecuteSearch Command, after 
-        // making sure the Command can be executed via calling CanExecute.
+        // Finalmente, utilizamos el operador InvokeCommand de RxUI's, el cual toma
+        // el String y llama al método Execute del Command ExecuteSearch, siempre tras
+        // comprobar que Command puede ser ejecutado llamando a CanExecute.
         this.WhenAnyValue(x => x.SearchTerm)
             .Throttle(TimeSpan.FromMilliseconds(800), RxApp.MainThreadScheduler)
             .Select(x => x?.Trim())
@@ -129,36 +130,36 @@ public class AppViewModel : ReactiveObject
             .Where(x => !String.IsNullOrWhiteSpace(x))
             .InvokeCommand(ExecuteSearch);
 
-        // How would we describe when to show the spinner in English? We 
-        // might say something like, "The spinner's visibility is whether
-        // the search is running". RxUI lets us write these kinds of 
-        // statements in code.
+        // Cómo describiríamos cuando mostrar nuestro "spinner" en Español? 
+        // Diríamos algo así como "La visibilidad del spinner es cuando la
+        // la búsqueda se está ejecutando". RxUI nos permite escribir algo así
+        // en nuestro código
         //
-        // ExecuteSearch has an IObservable<bool> called IsExecuting that
-        // fires every time the command changes execution state. We Select() that into
-        // a Visibility then we will use RxUI's
-        // ToProperty operator, which is a helper to create an 
-        // ObservableAsPropertyHelper object.
+        // ExecuteSearch tiene un IObservable<bool> que se llama IsExecuting y 
+        // es lanzado cada vez que el Command cambia su estado de ejecución. Ahora
+        // con el operador Select() lo convertimos al tipo Visibility y entonces 
+        // podemos utilizar el operador ToProperty de RxUI, el cual nos ayuda a crear
+        // un objeto de tipo ObservableAsPropertyHelper.
 
         _SpinnerVisibility = ExecuteSearch.IsExecuting
             .Select(x => x ? Visibility.Visible : Visibility.Collapsed)                
             .ToProperty(this, x => x.SpinnerVisibility, Visibility.Hidden);
         
-        // We subscribe to the "ThrownExceptions" property of our ReactiveCommand,
-        // where ReactiveUI pipes any exceptions that are thrown in 
-        // "GetSearchResultsFromFlickr" into. See the "Error Handling" section
-        // for more information about this.
+        // Nos subscribimos a la propiedad "ThrownExceptions" de nuestro 
+        // ReacitveCommand, que es donde ReactiveUI maneja cualquier excepción que es
+        // lanzada desde "GetSearchResultsFromFlickr". Revisa la sección "Gestión de errores""
+        // para más información acerca de esto.
         ExecuteSearch.ThrownExceptions.Subscribe(ex => {/* Handle errors here */});
 
-        // Here, we're going to actually describe what happens when the Command
-        // gets invoked - we're going to run the GetSearchResultsFromFlickr every
-        // time the Command is executed. 
-        //
-        // The important bit here is the return value - an Observable. We're going
-        // to end up here with a Stream of FlickrPhoto Lists: every time someone 
-        // calls Execute, we eventually end up with a new list which we then 
-        // immediately put into the SearchResults property, that will then 
-        // automatically fire INotifyPropertyChanged.
+        // Aquí, vamos a describir qué pasa cuando el Command es invocado - 
+        // vamos a lanzar el GetSearchResultsFromFlickr cada vez que Command 
+        // es ejecutado.
+        // 
+        // La parte importante aquí es el valor devuelto - un Observable. Vamos a
+        // terminar aquí con un Stream de FlickrPhoto como una Lista: cada vez que 
+        // llamemos a Execute, finalizaremos con una nueva lista, la cual pondremos
+        // inmediatamente en nuestra propiedad SearchResults, que disparará 
+        // automáticamente INotifyPropertyChanged.
         _SearchResults = ExecuteSearch.ToProperty(this, x => x.SearchResults, new List<FlickrPhoto>());
     }
 
@@ -189,28 +190,27 @@ public class AppViewModel : ReactiveObject
     }
 }
 ```
+El objetivo de la sintáxis para propiedades lectura-escritura de ReactiveUI es notificar a los Observers que una propiedad ha cambiado.
+De otro modo, no estaríamos preparados para saber cuando han cambiado.
 
-The goal of the syntax of ReactiveUI for read-write properties is to notify Observers that a property has changed. 
-Otherwise we would not be able to know when it was changed. 
+ExecuteSearch es básicamente una task asíncrona ejecutada en background.
 
-The ExecuteSearch is basically an asynchronous task, executing in the background.
-  
-In cases when we don't need to provide for two-way binding between the View and the ViewModel, we can use
-one of many ReactiveUI Helpers, to notify Observers of a changing read-only value in the ViewModel. We use the
-ObservableAsPropertyHelper twice, once to turn a generic List<T> into an observable read-only collection,
-and then to change the visibility of an indicator to show that a request is currently executing.
+En casos donde no necesitamos proveer un binding two-way entre la nuestra View y el ViewModel, podemos utilizar una mas Helpers de ReactiveUI para notificar a los Observers de los cambios en propiedades de lectura de nuestro ViewModel. Utilizamos 
+ObservableAsPropertyHelper dos veces, una para generar una List<T> como una collección observable read-only, para los cambios en la
+visibilidad de nuestro indicador que muestra que estamos ejecutando actualmente nuestra búsqueda.
 
-This also works in the opposite direction, when we take the `SearchTerm` property and turn it into an observable. This means that we are notified every time a change occurs in the UI. Using Reactive Extensions, we then throttle those events,
-and ensure that the search occurs no sooner than 800ms after the last keystroke. And if at that point the user did not change the
-last value, or if the search term is blank, we ignore the event completely.
+Esto también funciona en la dirección opuesta, cuando convertimos nuestra propiedad `SearchTerm` en observable. Esto significa
+que estamos notificando cada cambio que ocurre en nuestra UI. Utilizando Reactive Extensions, tras esperara los eventos y asegurarnos
+de que la búsqueda no ocurre antes de 800ms desde la última pulsación. Y si en este punto el usuario no hizo cambios en el último valor, o si la búsqueda está en blanco, ingnoramos completamente los eventos.
 
-Using the `IsExecuting` observable of `ReactiveCommand`, we derive another 
-observable to change the visibility of the "processing indicator".
+Utilizando el observable `IsExecuting`de `ReactiveCommand`, derivamos un nuevo observable que cambia la visibilidad para nuestro 
+"indicador de proceso".
 
-The `GetSearchResultsFromFlickr` method gets invoked every time there is a 
-throttled change in the UI, so let's define what should happen when a user executes a new search.
+El método `GetSearchResultsFromFlickr` se invoca cada vez que hay un cambio filtrado en nuetra UI, 
+definiendo qué debería ocurrir cuando un usuario ejecuta una nueva búsqueda.
 
-Create a simple model class to hold the Flickr results - since we never update the properties once we've created the object, we don't have to use a ReactiveObject.
+Crea una class sencilla para usar como modelo de los resultados de Flickr - ya que nunca actualizaremos las propiedades una vez
+creado el objeto, no tenemos que utilizar ReactiveObject.
 
 ```csharp
 namespace FlickrBrowser
@@ -224,9 +224,9 @@ namespace FlickrBrowser
 }
 ```
 
-**Our ViewModel is now complete**
+**Nuestro ViewModel ahora está completo**
 
-Now we need to create a View for our view model, the following is an example
+Ahora necesitamos crear una View para nuestro ViewModel, lo siguiente es un ejemplo
 
 ```xml
 <Window x:Class="FlickrBrowser.MainWindow"

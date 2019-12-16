@@ -5,11 +5,11 @@ Order: 10
 
 # .NET Standard Library
 
-As of version 8.0 of ReactiveUI, support for [.NET Standard](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) will be included. For any version lower than 8.0, you are still able to reference the RxUI nuget package (along with other popular PCL-based packages) with a little modification.
+A partir de la versión 8.0 de ReactiveUI, tienes soporte para [.NET Standard](https://docs.microsoft.com/en-us/dotnet/standard/net-standard). Para versiones anteriores a 8.0, puedes seguir utilizando RxUI nuget package (para otros proyectos basados en el popular paquete PCL) con una pequeña modificación.
 
-## Projects using Project.json:
+## Proyectos utilizando Project.json:
 
-Locate the project.json file in your netstandard library project, then locate the following:
+Localiza el archivo project.json en tu proyecto netstandard y busca los siguiente:
 
 ```json
 "frameworks": {
@@ -17,7 +17,7 @@ Locate the project.json file in your netstandard library project, then locate th
 }
 ```
 
-and append the `imports` section:
+y añade la sección `imports`:
 
 ```json
 "frameworks": {
@@ -27,11 +27,11 @@ and append the `imports` section:
   }
 ```
 
-For a detailed understanding of what `imports` does, read the following [detailed post](https://msdn.microsoft.com/en-us/library/system.windows.input.icommand.aspx).
+Para comprender en datalle qué hace `imports`, lee el siguiente [detallado post](https://msdn.microsoft.com/en-us/library/system.windows.input.icommand.aspx).
 
-## Projects using PackageReference:
+## Proyectos utilizando PackageReference:
 
-Edit your .Net Standard project file and locate the following:
+Edita tu archivo de proyecto .NET Standard y localiza lo siguiente:
 
 ```xml
 <PropertyGroup>
@@ -39,7 +39,7 @@ Edit your .Net Standard project file and locate the following:
 </PropertyGroup>
 ```
 
-  then change it as such:
+cámbialo por lo siguiente:
 
 ```xml
 <PropertyGroup>
