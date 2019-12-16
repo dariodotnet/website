@@ -1,165 +1,166 @@
-Title: Grammar and Mechanics
+Title: Gramática y Mecanismos
 ---
+Utilizando ciertas reglas de gramática y mecanismos, ayudamos a mantener consistencia y claridad en nuestros escritos. Esta sección establecerá nuestras reglas de estilo, la cuales aplicaremos a todo nuestro contenido, salvo que se indique lo contrario en esta guía. (Cubrimos muchos casos en esta sección - el buscador de características ayudará si estás buscando algo particular.)
 
-Adhering to certain rules of grammar and mechanics helps us keep our writing clear and consistent. This section will lay out our house style, which applies to all of our content unless otherwise noted in this guide. (We cover a lot of ground in this section—the search feature will help if you're looking for something in particular.)
+# Básicos
+* **Escribe para todos los lectores.** Algunas personas leen cada palabra que escribes. Otras sólo lo justo. Ayuda a todos a que puedan leer mejor agrupando ideas y utilizando cabeceras y descripciones cortas descriptivas.
 
-# Basics
-* **Write for all readers.** Some people will read every word you write. Others will just skim. Help everyone read better by grouping related ideas together and using descriptive headers and subheaders.
+* **Concentra tu mensaje.** Crea una jerarquía de información. Dirige hacia el punto de mayor interés del contenido en frases, párrafos, secciones y páginas.
 
-* **Focus your message.** Create a hierarchy of information. Lead with the main point or the most important content, in sentences, paragraphs, sections, and pages.
+* **Se conciso.** Utiliza frase cortas. Evita modificadores innecesarios.
 
-* **Be concise.** Use short words and sentences. Avoid unnecessary modifiers.
+* **Se específico.** Evita el lenguaje vago. Elimina lo supérfluo.
 
-* **Be specific.** Avoid vague language. Cut the fluff.
+* **Se consistente.** Adhiérete al estilo y patrones resumidos en esta guía.
 
-* **Be consistent.** Stick to the copy patterns and style points outlined in this guide.
+# Guía
 
-# Guidelines
+# Abreviaturas y acrónimos
 
-# Abbreviations and acronyms
-If there’s a chance your reader won’t recognize an abbreviation or acronym, spell it out the first time you mention it. Then use the short version for all other references. If the abbreviation isn’t clearly related to the full version, specify in parentheses.
+Si existe la posibilidad de que tu lector no reconozca una abreviatura o acrónimo, acláralo la primera vez que lo menciones. Después utiliza la versión corta para el resto de referencias. Si la abreviatura no está bien relacionada con la versión completa, especifícala entre paréntesis.
 
-* First use: Network Operations Center
-* Second use: NOC
-* First use: Coordinated Universal Time (UTC)
-* Second use: UTC
+* Primer uso: Network Operations Center
+* Segundo uso: NOC
+* Primer uso: Coordinated Universal Time (UTC)
+* Segundo uso: UTC
 
-If the abbreviation or acronym is well known, like API or HTML, use it instead (and don’t worry about spelling it out).
+Si la abreviatura o acrónimo es bien conocida, como API o HTML, utilílala (y no te preocupes por deletrearla).
 
-# Active voice
-Use active voice. Avoid passive voice.
+# Voz activa
+Utiliza la voz activa. Evita la voz pasiva.
 
-* In active voice, the subject of the sentence does the action. In passive voice, the subject of the sentence has the action done to it.
+* En voz activa, el sujeto de la oración hace la acción. En voz pasiva, el sujeto de la oración tiene la acción de hacerlo.
 
-* Yes: Marti logged into the account.
-* No: The account was logged into by Marti.
+* Si: Mati accedió a su cuenta.
+* No: Se accedió a la cuenta por parte de Marti.
 
-Words like "was" and "by" may indicate that you’re writing in passive voice. Scan for these words and rework sentences where they appear.
+Palabras como "era" o "por" indican que estás escribiendo con voz pasiva. Busca estas palabras y crea nuevas oraciones donde aparezcan.
 
-One exception is when you want to specifically emphasize the action over the subject. In some cases, this is fine.
+Una excepción es cuando quieres específicamente enfatizar la acción sobre el sujeto. En algunos casos, esto funciona.
 
-* Your account was flagged by our abuse team.
+* Tu cuenta fue marcada por nuestro equipo de abusos.
 
-# Capitalization
-We use a few different forms of capitalization. Title case capitalizes the first letter of every word except articles, prepositions, and conjunctions. Sentence case capitalizes the first letter of the first word.
+# Capitalización.
 
-When writing out an email address or website URL, use all lowercase.
+Utilizamos diferentes tipos de capitalización. En títulos capitalizamos la primera letra de cada palabra excepto artículos, preposiciones y conjcciones. En frase capitalizamos la primera letra de la primera palabra.
+
+Cuando escribas una dirección de correo electrónico o dirección web, utiliza sólo minúsculas.
 
 * hello@reactiveui.net
 * reactiveui.net
 
-Don't capitalize random words in the middle of sentences. There are words that we never capitalize in a sentence and others where we do. Refer to the [Word List](word-list) for more information.
+No capitalices de modo aleatorio en mitad de las frases. Hay palabras que nunca capitalizamos en una frase y otras que sí. Revisa la [Lista de Palabras](word-list) para más información.
 
-# Contractions
-They’re great! They give your writing an informal, friendly tone. In most cases, use them as you see fit. 
+# Contracciones
+
+Son geniales. Nos permiten escribir en un tono informal y amigable. En la mayoría de casos, utilízalas como mejor se ajusten. 
 
 # Emoji
-Emoji are a fun way to add humor and visual interest to your writing, but use them infrequently and deliberately.
+Los emoji son divertions y aportan un tono de humor y visual a lo que escribes, pero no los uses muy a menudo.
 
-# Numbers
-Spell out a number when it begins a sentence. Otherwise, use the numeral. This includes ordinals, too.
+# Números
+Utiliza letras cuando se inicia una frase. En otros casos, utliza el número. Esto también incluye ordinales. (En español evitará para ordinales)
 
-* Ten new employees started on Monday, and 12 start next week.
-* I ate 3 donuts at Coffee Hour.
-* Meg won 1st place in last year’s Walktober contest.
-* We hosted a group of 8th graders who are learning to code.
+* Diez nuevos empleados empiezan el Lunes y 12 la siguiente semana.
+* Comí 3 donuts en Coffe Hour.
 
-Numbers over three digits get commas:
+Números con más de tres dígitos separados por comas;
 
 * 999
 * 1,000
 * 150,000
 
-Write out big numbers in full. Abbreviate them if there are space restraints, as in a tweet or a chart: 1k, 150k.
+Escribe los números grandes en su totalidad. Abreviálos si tienes poco espacio, como en un tweet o una gráfica:
+1k, 150k.
 
-# Dates
+# Fechas
 
-Generally, spell out the day of the week and the month. Abbreviate only if space is an issue in the app.
+Generalmente, escribe el de la semana y el mes. Abrevia si el espacio es un problema para la app.
 
-* Saturday, January 24
-* Sat., Jan. 24
-* Decimals and fractions
+* Sábado, 24 de Enero
+* Sab., 24 Ene
 
-# Decimals and fractions
+# Decimales y fracciones
 
-Spell out fractions.
+Deletrea las fracciones.
 
-* Yes: two-thirds
+* Sí: dos-tres
 * No: 2/3
 
-Use decimal points when a number can’t be easily written out as a fraction, like 1.375 or 47.2.
+Utiliza puntos decimaloes cuando escribirlo como fracción no sea sencillo, como 1.375 o 47.2.
 
-# Percentages
+# Porcentajes
 
-Use the % symbol instead of spelling out "percent."
+Usa el símbolo % en lugar de deletreart "porcentaje."
 
-# Ranges and spans
+# Rangos y lapsos
 
-Use a hyphen (-) to indicate a range or span of numbers.
+Usa un guión (-) para indicar un rango o lapso de números.
 
-* It takes 20-30 days.
+* Tomará entre 20-30 días.
 
-# Money
+# Dinero
 
-When writing about US currency, use the dollar sign before the amount. Include a decimal and number of cents if more than 0.
+Cuando escribas acerca de dólares, utiliza el signo antes del total. Incluye un decimal y el número de centavos si es mayor que 0.
 
 * $20
 * $19.99
 
-When writing about other currencies, follow the same symbol-amount format:
+Cuando escribas acerca de otras monedas, sigue el mismo formato símbolo-total:
 
 * ¥1
 * €1
 
-# Telephone numbers
+# Números de teléfono
 
-Use dashes without spaces between numbers. Use a country code if your reader is in another country.
+Utiliza guiones en lugar de espacions entre números. Utiliza el código de país si tus lectores sob de un país diferente.
 
 * 555-867-5309
 * +1-404-123-4567
 
-# Temperature
+# Temperatura
 
-Use the degree symbol and the capital C abbreviation for Celsius.
+Utiliza el símbolo de grados con la C mayúscula como abreviatura para Celsius.
 
 * 98°F
 
-# Time
+# Hora
 
-Use numerals and am or pm, with a space in between. Don’t use minutes for on-the-hour time.
+Utiliza numeros y am o pm separado por un espacio. No utilices minutos para horas en punto.
 
 * 7 am
 * 7:30 pm
 
-Use a hyphen between times to indicate a time period.
+Utiliza un guión entre las horas para indicar un rango de tiempo.
 
 * 7am-10:30pm
 
-Specify time zones when writing about an event or something else people would need to schedule. Default to UTC unless targeting a particular timezone.
+Especifica la zona horaria cuando escribas acerca de eventos o algo que la gente necesite programar. Por defecto es UTC a menos que el objetivo sea una zona horaria particular.
 
-Abbreviate time zones within the continental United States as follows:
+Abrevia las zonas continentales horarias del siguiente modo:
 
 * Eastern time: ET
 * Central time: CT
 * Mountain time: MT
 * Pacific time: PT
 
-When referring to international time zones, spell them out: Nepal Standard Time, Australian Eastern Time. If a time zone does not have a set name, use its Coordinated Universal Time (UTC) offset.
+Cuando te refieras a zonas horarias internacional, escríbelas completas: Nepal Standard Time, Australian Eastern Time. Si una zona horaria no tiene un nombre, utiliza Coordinated Universal Time (UTC) con su diferencia.
 
-Abbreviate decades when referring to those within the past 100 years.
+Abrevia las décadas cuando te refieras a los anteriores 100 años.
 
-* the 00s
-* the 90s
+* los 00s
+* los 90s
 
-When referring to decades more than 100 years ago, be more specific:
+Cuando te refieras a décadas de hace más de 100 años, se más específico:
 
-* the 1900s
-* the 1890s
+* los 1900s
+* los 1890s
 
-# Punctuation
+# Puntuación
 
-# Apostrophes
+# Apóstrofes
 
+(Se mantiene el texto en inglés ya que no aplica para el español)
 The apostrophe’s most common use is making a word possessive. If the word already ends in an s and it’s singular, you also add an ‘s. If the word ends in an s and is plural, just add an apostrophe.
 
 * The donut thief ate Sam’s donut.
@@ -168,24 +169,24 @@ The apostrophe’s most common use is making a word possessive. If the word alre
 
 Apostrophes can also be used to denote that you’ve dropped some letters from a word, usually for humor or emphasis. This is fine, but do it sparingly.
 
-# Colons
+# Dos puntos
 
-Use a colon (rather than an ellipsis, em dash, or comma) to offset a list.
+Utiliza dos puntos (en lugar de puntos suspensivos, guiones o comas) al crear una lista.
 
-* Erin ordered 3 kinds of donuts: glazed, chocolate, and pumpkin.
-You can also use a colon to join 2 related phrases. If a complete sentence follows the colon, capitalize the 1st word.
+* Erin compró 3 tipos de donuts: glaseados, chocolat y calabaza.
+También pudes utilizar dos puntos para unir dos frases relacionadas. Si una frase completa va seguida de dos puntos, capitaliza la primera palabra.
 
-* I was faced with a dilemma: I wanted a donut, but I’d just eaten a bagel.
+* Estoy en un dilema: Me apetece un donut, pero acabo de comerme un bagel.
 
-# Commas
+# Comas
 
-When writing a list, use the serial comma (also known as the Oxford comma).
+Cuando escribas una lista, utiliza coma.
 
-* Yes: David admires his parents, Oprah, and Justin Timberlake.
-* No: David admires his parents, Oprah and Justin Timberlake.
-Otherwise, use common sense. If you’re unsure, read the sentence out loud. Where you find yourself taking a breath, use a comma.
+* Sí: David admira a sus padres, Oprah, y a Justin Timberlake.
+* No: David admiara a sus padres, Oprah y Justin Timberlake.
+De todos modos, utiliza el sentido común. Si no estás seguro, lee la frase en voz alta y cuando te encuentres haciendo una pausa, utiliza una coma.
 
-# Dashes and hyphens
+# Guiones (Dashes and hyphens)
 
 Use a hyphen (-) without spaces on either side to link words into single phrase, or to indicate a span or range.
 
