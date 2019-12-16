@@ -1,12 +1,12 @@
 Order: 10
 ---
 
-This page is an overview of ReactiveUI. 
+Esta página es un vistazo a ReactiveUI. 
 
-# What is ReactiveUI
+# Qué es ReactiveUI
 
-# Why reactive
+# Porqué reactive
   
-# What ReactiveUI is not
+# Qué no es ReactiveUI
 
-# What’s next
+# Qué más
