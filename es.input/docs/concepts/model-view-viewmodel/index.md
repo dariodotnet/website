@@ -3,9 +3,9 @@ Title: Model, View, ViewModel
 ---
 
 
-# Marshalling property change events from nested viewmodels
+# Eventos de cambio en propiedades de viewmodels anidados 
 
-this.WhenAny makes it stupidly easy to marshal property change events from nested viewmodel instances..
+this.WhenAny hace que sea estúpidamente sencillo manejar los eventos de cambio para instancias de viewmodel anidadas..
 
 i.e. 
 
