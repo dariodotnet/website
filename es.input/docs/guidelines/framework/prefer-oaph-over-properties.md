@@ -1,10 +1,8 @@
-# Prefer ObservableAsPropertyHelpers over setting properties explicitly
+# Es preferible ObservableAsPropertyHelpers en lugar de establecer propiedades explícitamente
 
-When a property's value depends on another property, a set of properties, or an 
-observable stream, rather than set the value explicitly, use 
-`ObservableAsPropertyHelper` with `WhenAny` wherever possible.
+Cuando el valor de una propiedad, un conjunto de propiedades o un stream observable, depende de otra propiedad, en lugar de establecer el valor explítiamente, utiliza `ObservableAsPropertyHelper` con `WhenAny`siempre que puedas.
 
-## Do
+## Así sí
 
 ```csharp
 public class RepositoryViewModel : ReactiveObject
@@ -23,7 +21,7 @@ public class RepositoryViewModel : ReactiveObject
 }
 ```
 
-## Don't
+## Así no
 
 ```csharp
 this.WhenAny(x => x.StuffFetched, y => y.OtherStuffNotBusy, (x, y) => x && y)
@@ -31,11 +29,11 @@ this.WhenAny(x => x.StuffFetched, y => y.OtherStuffNotBusy, (x, y) => x && y)
   .Subscribe(x => CanDoIt = x);
 ```
 
-## Why?
-1. `ObservableAsPropertyHelper` is as a kind of "proof" that a given property has one source of change (the pipeline against which you call `ToProperty`). If it's just a plain old property, it can be set from multiple places leading to spaghetti code. :spaghetti:
-2. `ObservableAsPropertyHelper` will take care of raising `INotifyPropertyChanged` events - if you're creating read-only properties, this can save so much boilerplate code.
-3. `WhenAny` lets you combine multiple properties, treat their changes as observable streams, and craft ViewModel-specific outputs.
-4. Scheduling. Simply pass in a value for the `scheduler` parameter, which avoids you needing to call `ObserveOn` yourself.
-5. Laziness. Simply set `deferSubscription` to `true` and now your property is lazily-evaluated and will defer the subscription to the observable source until the first call.
+## Porqué?
+1. `ObservableAsPropertyHelper` es como una "prueba" de que tu propiedad sólo tiene un camino de cambio (aprovechando además que podemos establecerla utilizando `ToProperty`). Si utilizásemos una propiedad básica, se puede establecer el valor desde diferentes sitios, creando el spagetti code.
+2. `ObservableAsPropertyHelper` se encargará de disparar los eventos de `INotifyPropertyChanged` - si creas propiedades read-only, puedes ahorrar mucho código repetitivo.
+3. `WhenAny` te permite combinar múltples propiedades, tratar los cambios como un stream observable y crear retornos espcíficos para tu ViewModel.
+4. Scheduling. Simplemente pasa como parámetro un valor `scheduler`, el cual te evitará la necesidad de llamar a `ObserveOn` por ti mismo.
+5. Laziness. Simplemente establece `deferSubscription` a `true` y ahora tu propiedad tendrá una evaluación perezosa y así la subscripción a tu observable se hará en diferido en la primera llamada.
 
 

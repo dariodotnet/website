@@ -1,8 +1,8 @@
-# Asynchronous Commands
+# Commands Asíncronos
 
-Prefer using async `ReactiveCommand`'s over the more basic `ReactiveCommand` for all but the most simple tasks. In ReactiveUI, you should never put Interesting™ code inside the Subscribe block - Subscribe is solely to log the result of operations, or to wire up properties to other properties.
+Es preferible utilizar `ReactiveCommand` asíncrono en lugar del `ReactiveCommand`más básico para todo, incluso para las tareas mas simples. En ReactiveUI, nunca debes ponser código Interesante™ dentro del bloque Subscribe - Subscribe es solamente para capturar los resultados de operación con Log's o para conectar propiedades con otras propiedades.
 
-## Do
+## Así sí
 
 ```csharp
 // In XAML
@@ -29,7 +29,7 @@ public class RepositoryViewModel : ReactiveObject
 }
 ```
 
-## Don't
+## Así no
 
 ```csharp
 // In XAML
@@ -59,13 +59,13 @@ public class RepositoryViewModel : ReactiveObject
 }
 ```
 
-## Why?
+## Porqué?
 
-A lot of the power of `ReactiveCommand` comes from the async version. In the basic version the following features do not function as expected:
+Gran parte del poder de `ReactiveCommand`viene de la versión asíncrona. En la versión básica las siguientes características no funcionan como se espera:
 
-* `IsExecuting` observable will not report on your asynchronous method when it is inside the `Subscribe`
-* `ThrownExceptions` will not catch anything.
-* `CanExecute` is not affected if the command is currently executing, leading to the possibilty of multiple execution at the same time.
+* `IsExecuting` este observalbe no reportará en tu método asíncrono cuando está dentro de `Subscribe`
+* `ThrownExceptions` no capturará nada.
+* `CanExecute`no es afectado si el Command está actualmente ejecutándose, permitiendo la posibilidad de múltiples ejecucions al mismo tiempo.
 
 
 

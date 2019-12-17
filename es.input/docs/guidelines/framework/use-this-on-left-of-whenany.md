@@ -1,6 +1,6 @@
-# Almost always use `this` as the left hand side of a `WhenAny` call.
+# Casi siempre utiliza `this`a la izquierda del método `WhenAny`.
 
-## Do
+## Así sí
 ```csharp
 public class MyViewModel
 {
@@ -24,7 +24,7 @@ public class MyViewModel
 }
 ```
 
-## Don't
+## Así no
 ```csharp
 public class MyViewModel(IDependency dependency)
 {
@@ -33,6 +33,5 @@ public class MyViewModel(IDependency dependency)
 }
 ```
 
-## Why?
-* The lifetime of `dependency` is unknown - if it is a singleton it
- could introduce memory leaks into your application.
+## Porqué?
+* El ciclo de vida de `dependency` es desconocido - si es un singleton, podría introducir un memory leak en tu aplicación.

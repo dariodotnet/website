@@ -1,5 +1,6 @@
-# Command Names
+# Command Nombres
 
+No utilices el sufijo `Command` para tus `ReactiveCommand`; en su lugar, utiliza un vervo que decriba la acción del Command. Por ejemplo:
 Don't suffix `ReactiveCommand` properties' names with `Command`; instead, name the property using a verb that describes the command's action. For example:
 
 ```csharp
@@ -11,4 +12,4 @@ Synchronize = ReactiveCommand.CreateAsyncObservable(
 
 ```
 
-When a `ReactiveCommand`'s implementation is too large or too complex for an anonymous delegate, name the implementation's method the same name as the command, but with `Impl` suffixed (for example, `SychronizeImpl` above).
+Cuando la implementación de un `ReactiveCommand` es demasiado larga o compleja para un delegate anónimo, nombra tu implementación con el mismo nombre del Command pero utilizando el sufijo `Impl` (por ejemplo, `SyncronizeImpl` como se muestra arriba).

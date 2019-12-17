@@ -1,8 +1,8 @@
 # Commands
 
-Prefer binding user interactions to commands rather than methods.
+Es preferible que las interacciones de tu usuarios hagan Binding a Commands en lugar de métodos.
 
-## Do
+## Así sí
 
 ```csharp
 // In XAML
@@ -22,9 +22,9 @@ public class RepositoryViewModel : ReactiveObject
 }
 ```
 
-## Don't
+## Así no
 
-Use the Caliburn.Micro conventions for associating buttons and commands:
+Utiliza las convenciones de Caliburn.Micro para asociar botones y Commands:
 
 ```csharp
 // In XAML
@@ -36,12 +36,12 @@ public class RepositoryViewModel : PropertyChangedBase
 }
 ```
 
-## Why?
+## Porqué?
 
-* ReactiveCommand exposes the `CanExecute` property of the command to 
-  enable applications to introduce additional behaviour.
-* It handles marshaling the result back to the UI thread.
-* It tracks in-flight items.
+* `ReactiveCommand` expone la propiedad `CanExecute` para habilitar 
+comportamientos adicionales en nuestras aplicaciones.
+* Manejamos que el resultado vuelva al hilo de nuestra UI.
+* Manejamos elementos al vuelo.
 
 
 

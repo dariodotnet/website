@@ -1,7 +1,7 @@
-# Use descriptive variables in your `WhenAny`
-In situations where you are detecting changes in multiple expressions, ensure you name the variables in the `selector` 
+# Utiliza nombres decriptivos al usar `WhenAny`
+En situaciones donde estas detectando cambios en múltiples expresiones, asegúrate de nombrar las variables convenientemente en el `selector`
 
-## Do
+## Así sí
 ```csharp
 public class MyViewModel : ReactiveObject
 {
@@ -18,7 +18,7 @@ public class MyViewModel : ReactiveObject
 }
 ```
 
-## Don't
+## Así no
 ```csharp
 public class MyViewModel : ReactiveObject
 {
@@ -35,5 +35,5 @@ public class MyViewModel : ReactiveObject
 }
 ```
 
-## Why?
-This helps greatly with the readability of complex expressions, particularly when working with boolean values.
+## Porqué?
+Esto ayuda mucho con la legibilidad de expresiones complejas, particularmente cuando trabajamops cobn valores de tipo boolean.

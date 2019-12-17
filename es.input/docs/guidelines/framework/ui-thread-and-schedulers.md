@@ -1,23 +1,22 @@
-# UI Thread and Schedulers
-Always make sure to update the UI on the `RxApp.MainThreadScheduler` to ensure UI  changes happen on the UI thread. In practice, this typically means making sure to update view models on the main thread scheduler.
+# UI Thread y Schedulers
+Siempre queremos estar seguros de actualizar la UI en el `RxApp.MainThreadScheduler` para asegurarnos de que los cambios que suceden en nuestra UI se hacen en el hilo de la UI. En la práctica, esto significa que nos aseguramos de actualizar el ViewModel en el main thread scheduler.
 
-## Do
+## Así sí
 ```csharp
 FetchStuffAsync()
   .ObserveOn(RxApp.MainThreadScheduler)
   .Subscribe(x => this.SomeViewModelProperty = x);
 ```
 
-## Better
-Even better, pass the scheduler to the asynchronous operation - this is often
-necessary for more complex tasks.
+## Mejor
+Todavía mejor, pasa el scheduler a la operación asíncrina - a menudo es necesario para tareas mas complejas.
 
 ```csharp
 FetchStuffAsync(RxApp.MainThreadScheduler)
   .Subscribe(x => this.SomeViewModelProperty = x);
 ```
 
-## Don't
+## Así no
 ```csharp
 FetchStuffAsync()
   .Subscribe(x => this.SomeViewModelProperty = x);
