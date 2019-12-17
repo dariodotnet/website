@@ -1,40 +1,40 @@
 Title: Xamarin Mac
 ----
 
-This platform has two different base class libraries:
+Esta plataforma tiene dos librerías base diferentes:
 
-* Mobile which is a custom, super lean and restrictive subset of NET45 that excludes many Windowisms. 
+* Mobile la cual es un subconjunto de NET45 personalizado, aligerado y restrictivo que excluye muchos Windowsisms.
 
 > /Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/
 
-* XM 4.5 which looks, acts and barks like a normal .NET program but doesn't include things like System.Drawing and System.Windows.Forms on OSX. This allows you to easily consume standard "desktop" libraries that target NET45 via NuGet as long as the library does not depend on assemblies not available in XM45.
+* XM 4.5 que luce, actua y se comporta como un programa normal de .NET, pero no incluye cosas como System.Drawing y System.Windows.Forms en OSX. Esto te permite fácilmente consumir librerías estandard de escritorio con targe NET45 vía NuGuet siempre que la biblioteca no dependa de ensamblados no disponibles en XM45.
 
 > /Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/4.5/
 
-_ReactiveUI-Events_ and _ReactiveUI_ use Xamarin.Mac Mobile but can be consumed into a Xamarin Mac XM 4.5 application. We would love to ship XM45 assemblies with the project but [it is currently impossible to do so](https://github.com/NuGet/Home/issues/2662).
+_ReactiveUI-Events_ y _ReactiveUI_ utilizan Xamarin.Mac Mobile pero pueden ser consumidas por aplicaciones Xamarin Mac XM 4.5. Deberíamos poder lanzar assemblies XM45 con el prohecto pero [es actualmente imposible hacerlo](https://github.com/NuGet/Home/issues/2662).
 
-Your viewmodels should inherit from `ReactiveObject`
+Tus ViewModels deberían heredar de `ReactiveObject`
 
 - https://reactiveui.net/api/reactiveui/reactiveobject/
 
-Use `ISupportsActivation` and `WhenActivated` for lifecycle
+Utiliza `ISupportsActivation` y `WhenActivated` para el ciclo de vida
 
 - https://reactiveui.net/api/reactiveui/isupportsactivation/
 - https://reactiveui.net/docs/handbook/when-activated/
 
-Keep references to your subscriptions
+Mantén las referencias a tus subscripciones
 
 - https://reactiveui.net/docs/concepts/reactive-programming/subscriptions#lifecycle
 
-Use disposables to manage lifetime, scope and resources:
+Utiliza disposables para manejar el ciclo de vida, alcance y recursos:
 
 - https://reactiveui.net/docs/concepts/reactive-programming/disposables
 
-Don't use eventhandlers, use the extension methods shipped in `reactiveui.events` instead
+No utilices eventhandlers, utiliza los métodos de extensión disponibles en `reactiveui.events`
 
 - https://reactiveui.net/docs/handbook/events/
 
-Use your normal iOS concepts that you would usually use in OSX development, we have some base classes which you should use as they expose observables such as `Changed`, `Changing` and `Deactivated` that can be used for composition.
+Utiliza tu concepto normal de iOS tal y como usualmente desarrollas con OSX, tenermos aglunas clases base que deberías utilias y que exponene observables como `Changed`, `Changing` y `Deactivated` que puedes utilizar para composición.
 
 - https://reactiveui.net/api/reactiveui/reactivetableviewcontroller/
 - https://reactiveui.net/api/reactiveui/reactivetableview/

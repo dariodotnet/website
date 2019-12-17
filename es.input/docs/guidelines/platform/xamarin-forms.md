@@ -1,34 +1,34 @@
 Title: Xamarin Forms
 ---
 
-Ensure that you install `reactiveui.xamforms` into your applications.
+Asegúrate de instalar `reactiveui.xamforms` en tu aplicación.
 
 Your viewmodels should inherit from `ReactiveObject`
 
 - https://reactiveui.net/api/reactiveui/reactiveobject/
 
-Use wireupcontrols
+Utiliza wireupcontrols
 
 - https://reactiveui.net/docs/handbook/data-binding/xamarin-android/wire-up-controls
 
-Use `ISupportsActivation` and `WhenActivated` for lifecycle
+Utiliza `ISupportsActivation` y `WhenActivated` para el ciclo de vida
 
 - https://reactiveui.net/api/reactiveui/isupportsactivation/
-- https://reactiveui.net/docs/handbook/when-activated/
+- https://reactiveui.net/es/docs/handbook/when-activated/
 
-Keep references to your subscriptions
+Mantén las referencias a tus subscripciones
 
-- https://reactiveui.net/docs/concepts/reactive-programming/subscriptions#lifecycle
+- https://reactiveui.net/es/docs/concepts/reactive-programming/subscriptions#lifecycle
 
 Use disposables to manage lifetime, scope and resources:
 
 - https://reactiveui.net/docs/concepts/reactive-programming/disposables
 
-Don't use eventhandlers, use the extension methods shipped in `reactiveui.events.xamforms` instead
+No utilices eventhandlers, utiliza los métodos de extensión disponibles en `reactiveui.events.xamforms`
 
 - https://reactiveui.net/docs/handbook/events/
 
-Use your normal Xamarin Forms concepts that you would usually use in  Xamarin Forms development, we have some base classes which you should use as they expose observables such as `Changed`, `Changing` and `Deactivated` that can be used for composition.
+Utiliza tu concepto normal de Xamarin Forms tal y como usualmente desarrollas con Xamarin Forms, tenermos aglunas clases base que deberías utilias y que exponene observables como `Changed`, `Changing` y `Deactivated` que puedes utilizar para composición.
 
 - https://reactiveui.net/api/reactiveui.xamforms/reactivecarouselpage_1/
 - https://reactiveui.net/api/reactiveui.xamforms/reactivecontentpage_1/

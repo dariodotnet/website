@@ -1,28 +1,28 @@
 Title: Windows Universal Platform
 ---
 
-Your viewmodels should inherit from `ReactiveObject`
+Tus ViewModels deberían heredar de `ReactiveObject`
 
-- https://reactiveui.net/api/reactiveui/reactiveobject/
+- https://reactiveui.net/es/api/reactiveui/reactiveobject/
 
-Use `ISupportsActivation` and `WhenActivated` for lifecycle
+Utiliza `ISupportsActivation` y `WhenActivated` para el ciclo de vida
 
 - https://reactiveui.net/api/reactiveui/isupportsactivation/
-- https://reactiveui.net/docs/handbook/when-activated/
+- https://reactiveui.net/es/docs/handbook/when-activated/
 
-Keep references to your subscriptions
+Mantén las referencias a tus subscripciones
 
-- https://reactiveui.net/docs/concepts/reactive-programming/subscriptions#lifecycle
+- https://reactiveui.net/es/docs/concepts/reactive-programming/subscriptions#lifecycle
 
-Use disposables to manage lifetime, scope and resources:
+Utiliza disposables para manejar el ciclo de vida, alcance y recursos:
 
-- https://reactiveui.net/docs/concepts/reactive-programming/disposables
+- https://reactiveui.net/es/docs/concepts/reactive-programming/disposables
 
-Don't use eventhandlers, use the extension methods shipped in `reactiveui.events` instead
+No utilices eventhandlers, utiliza los métodos de extensión disponibles en `reactiveui.events`
 
 - https://reactiveui.net/docs/handbook/events/
 
-Use your normal UWP concepts that you would usually use in UWP development. There's also some extension methods which will make your life easier
+Utiliza tu concepto normal de UWP tal y como usualmente desarrollas con UWP. Hay algunos métodos de extensión que harán tu vida más fácil.
 
 - https://reactiveui.net/api/reactiveui/reactiveusercontrol_1/
 - https://reactiveui.net/api/reactiveui/iviewfor_1/

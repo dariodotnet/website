@@ -1,3 +1,3 @@
 # Tizen
 
-Keep an eye on https://github.com/reactiveui/ReactiveUI/pull/1387
+No te pierdas https://github.com/reactiveui/ReactiveUI/pull/1387

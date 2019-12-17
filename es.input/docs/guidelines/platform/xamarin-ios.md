@@ -1,28 +1,28 @@
 Title: Xamarin iOS
 ----
 
-Your viewmodels should inherit from `ReactiveObject`
+Tus ViewModels deberían heredar de `ReactiveObject`
 
-- https://reactiveui.net/api/reactiveui/reactiveobject/
+- https://reactiveui.net/es/api/reactiveui/reactiveobject/
 
-Use `ISupportsActivation` and `WhenActivated` for lifecycle
+Utiliza `ISupportsActivation` y `WhenActivated` para el ciclo de vida
 
 - https://reactiveui.net/api/reactiveui/isupportsactivation/
-- https://reactiveui.net/docs/handbook/when-activated/
+- https://reactiveui.net/es/docs/handbook/when-activated/
 
-Keep references to your subscriptions
+Mantén las referencias a tus subscripciones
 
 - https://reactiveui.net/docs/concepts/reactive-programming/subscriptions#lifecycle
 
-Use disposables to manage lifetime, scope and resources:
+Utiliza disposables para manejar el ciclo de vida, alcance y recursos:
 
 - https://reactiveui.net/docs/concepts/reactive-programming/disposables
 
-Don't use eventhandlers, use the extension methods shipped in `reactiveui.events` instead
+No utilices eventhandlers, utiliza los métodos de extensión disponibles en `reactiveui.events`
 
 - https://reactiveui.net/docs/handbook/events/
 
-Use your normal iOS concepts that you would usually use in iOS development, we have some base classes which you should use as they expose observables such as `Changed`, `Changing` and `Deactivated` that can be used for composition.
+Utiliza tu concepto normal de iOS tal y como usualmente desarrollas con iOS, tenermos aglunas clases base que deberías utilias y que exponene observables como `Changed`, `Changing` y `Deactivated` que puedes utilizar para composición.
 
 - https://reactiveui.net/api/reactiveui/reactivetableviewcontroller/
 - https://reactiveui.net/api/reactiveui/reactivetableview/
