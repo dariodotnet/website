@@ -1,6 +1,6 @@
 # Binding
 
-Once you have created a command and exposed it from your view model, the next logical step is to consume it from your view. The most common means of achieving this is via the `BindCommand` method. This method - of which there are several overloads - is responsible for tying any source `ICommand` to a target control. Typical usage looks like this:
+Una vez has creado un command y lo tienes expuesto desde tu ViewModel, el siguiente paso lógico es consumirlo desde tu View. El modo más común de conseguirlo es utilizando el método `BindCommand`, Este método, - que tiene muchas sobrecargas - es el responsable de vincularse con algún control que exponga un `ICommand`. Su uso típico ser verás así:
 
 ```cs
 // in a view
@@ -10,9 +10,9 @@ this.BindCommand(
     x => x.myControl);
 ```
 
-Here we bind the `myControl` control to the `MyCommand` command exposed by our view model. What happens next is contingent upon any `ICreatesCommandBinding` instances registered in the [service locator](https://reactiveui.net/docs/handbook/dependency-inversion/). However, normally `myControl` will be disabled whenever the command is unavailable. In addition, performing some default action against `myControl` will execute the command. For example, if `myControl` is a button, the required action would be a click (or tap).
+Aquí hacemos un bind del command de `myControl` con `MyCommand` que tenemos expuesto en nuestro ViewModel. Lo que sucede después depende de cualquier instancia de `ICreatesCommandBinding` registrada en el [service locator](https://reactiveui.net/es/docs/handbook/dependency-inversion/). Sin embargo, normalmente `myControl` estará desactivado mientras el command no esté disponible. Adicionalmente, realizar alguna acción predeterminada de `myControl`ejecutará el command. Por ejemplo, si `myControl`es un botón, la acción requerida será un click (o un tap).
 
-> **Note** The above example shows a naked call to `BindCommand`, but it will often be performed inside a `WhenActivated` block:
+> **Nota** El siguiente ejemplo muestra una llamada a `BindCommand` pero se ejecutará dentro de un bloque de `WhenActivates`:
 > 
 > ```cs
 > this.WhenActivated(
@@ -25,9 +25,9 @@ Here we bind the `myControl` control to the `MyCommand` command exposed by our v
 >     });
 > ```
 > 
-> Please see [the documentation on `WhenActivated`](https://reactiveui.net/docs/handbook/when-activated/) for more information.
+> Por favor, revisa [la documentación sobre `WhenActivated`](https://reactiveui.net/es/docs/handbook/when-activated/) para más información
 
-The form of `BindCommand` demonstrated above does not provide any hint as to which event instigates command execution. Hence, a default event will be used (such as `Click` or `Tapped`). If, on the other hand, you want to tie your command's execution to some event other than the default, you can use an overload of `BindCommand` that takes an event name:
+El modo mostrado arriba para `BindCommand` no nos ofrece una pista sobre qué event dispara la ejecución del command. Por lo tando, se utilizará un event por defecto (como puede ser `Click` o `Tapped`). Si, por otro lado, quieres atar la ejecución de tus commands a algún event por defecto, puedes utilizar una sobrecarga del método `BindCommand` pasando el nombre del event como parámentro:
 
 ```cs
 this.BindCommand(
@@ -37,14 +37,14 @@ this.BindCommand(
     nameof(myControl.SomeEvent));
 ```
 
-Here, the `SomeEvent` on `myControl` will be used to trigger command execution instead of the default event.
+Aquí, el `SomeEvent` de `myControl` será utiliado para disparar la ekecución del command en lugar del event por defecto.
 
-> **Note** When using this overload inside `WhenActivated`, it's important to dispose the binding when deactivating the view. `BindCommand` will subscribe to the given event each time the view is activated, if the binding is not disposed it will not unsubscribe from the event. This will lead to multiple subscriptions to the event, which will make the command execute once for each of the event subscriptions.
+> **Nota** Cuando utilizamos esta sobrecarga dentro de `WhenActivated`, es importante hacer dispose del binding cuando desactivamos la View. `BindCommand` se subscribirá al evento cada vez que la vista se active, y si el binding no hace el dispose, no se desuscribirá del event. Esto llevará a múltiples subscripcciones del event, lo que cual hará que el comando se ejecute una vez por cada subscripción activa del event.
 
-Finally, `BindCommand` also provides overloads that allow you to specify a parameter with which to execute the command. The parameter can be provided as a function, an observable, or even an expression that resolves a property on the view model:
+Finalmente, `BindCommand` también nos provee de sobrecargas que nos permite especificar un parámetro que pasaremos a la ejecución de nuestro command. El parámetro es provisto como una función, un observable un una expresión que resuelva una propiedad en el ViewModel:
 
 ```cs
-// pass through an execution count as the command parameter
+// pasando un contador de ejecucuón como parámetro del command
 var count = 0;
 this.BindCommand(
     this.ViewModel,
@@ -52,7 +52,7 @@ this.BindCommand(
     x => x.myControl,
     () => count++);
 
-// use an observable as the source for command parameters
+// Utilizando un observable como parámetro del command
 IObservable<int> param = ...;
 this.BindCommand(
     this.ViewModel,
@@ -60,7 +60,7 @@ this.BindCommand(
     x => x.myControl,
     param);
 
-// use a property on the VM as a command parameter
+// Utilizando una propiedad de nuestro VM como parámetro de nuestro command
 this.BindCommand(
     this.ViewModel,
     x => x.MyCommand,

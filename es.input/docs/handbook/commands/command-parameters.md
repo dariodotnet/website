@@ -1,20 +1,19 @@
 # Command Parameters
 
-Optionally, your command's execution logic can take a parameter. To do this, you need only use an appropriate overload of `Create*` when creating your `ReactiveCommand`:
+Opcionalmente, la lógica de ejecución de tus commands pueden tener un parámetro. Para hacerlo, sólo necesitas utilizar la sobrecarga apropiada de `Create*` cuando crees tu `ReactiveCommand`:
 
 ```cs
-// synchronous command taking a parameter
+// command síncrono recibiendo un parámetro
 var command1 = ReactiveCommand.Create<int>(param => Console.WriteLine("Received parameter with type {0}: {1}.", param.GetType().Name, param);
-// this outputs "Received parameter with type Int32: 42"
+// esto resuelve "Received parameter with type Int32: 42"
 command1.Execute(42);
 
-// asynchronous command taking a parameter
+// command asíncrono recibiendo un parámetro
 var command2 = ReactiveCommand.CreateFromObservable<int>(param => Observable.Return(param).Do(p => Console.WriteLine("Received parameter with type {0}: {1}.", p.GetType().Name, p)));
-// this outputs "Received parameter with type Int32: 42"
+// esto resuelve "Received parameter with type Int32: 42"
 command2.Execute(42);
 ```
 
-The parameter's type is captured as `TParam` in `ReactiveCommand<TParam, TResult>`. The type of both `command1` and `command2` above is `ReactiveCommand<int, Unit>`.
+El tipo de parámetro es capturado como `TParam` en `ReactiveCommand<TParam, TResult>`. El tipo de ambos `command1` y `command2` de arriba es `ReactiveCommand<int, Unit>`.
 
-Generally, you should avoid using command parameters. It is usually more appropriate for your view model to define properties for any state that your command's execution logic relies on.
-
+Generalmente, deberías evitar el uso de parámetros en command. Habitualmente es más apropiado para tu ViewModel definir propiedades en las que, en base a su estado, se ejecuta la lógica de tus commands.

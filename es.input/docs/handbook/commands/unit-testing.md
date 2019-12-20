@@ -1,7 +1,7 @@
 # Unit Testing
 
-Read http://kent-boogaart.com/blog/using-the-visual-studio-test-runner-for-mobile-development
+Lee http://kent-boogaart.com/blog/using-the-visual-studio-test-runner-for-mobile-development
 
-Don't mock ReactiveCommands.
+No utilices un Moq ReactiveCommands.
 
-ReactiveCommand itself is already designed around testability. Also, the likelihood that you will correctly mock ReactiveCommand semantics via Moq is pretty low, it's a pretty complicated class (and if you did, you would end up doing a ton of unnecessary work).
+`ReactiveCommand` está diseñado pensando en la pruebas. Además, la probabilidad de que suplante correctamente la semántica de `ReactiveCommand` a través de un Moq es bastante baja, es una clase bastante complicada (y si lo hiciera, terminaría haciendo un montón de trabajo innecesario). 

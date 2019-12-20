@@ -1,31 +1,31 @@
-## Asynchronous versus Synchronous Commands
+## Command asíncronos vs síncronos
 
-Even though the API presented by `ReactiveCommand` is asynchronous, you are not required to perform your execution logic asynchronously. If your command is not CPU-intensive or I/O-bound then it probably makes sense to provide synchronous execution logic. You can do so by creating a command via `ReactiveCommand.Create`:
+Partiendo de que la API de `ReactiveCommand` es asíncrona, no necesariamente tienes que hacer una ejecución de tu lógica asíncrona. Si tu command no hace uso intensivo de la CPU o es para manejo de archivos (I/O), entonces es problable pensar en ejecutar la lógica de forma síncrona. Pudes hacerlo creando el command vía `ReactiveCommand.Create`:
 
 ```cs
 var command = ReactiveCommand.Create(() => Console.WriteLine("a synchronous reactive command));
 ```
 
-There are several overloads of `Create` to facilitate commands that take parameters or return interesting values when they execute. These will be discussed in more detail below.
+Tienes muchas opciones para `Create` commands que tomen parámetros y devuevan valores interesante cuando sean ejecutados. Lo veremos más en detalle a continuación.
 
-If, on the other hand, your command's logic _is_ CPU- or I/O-bound, you'll want to use `CreateFromObservable` or `CreateFromTask`:
+Por otro lado, si la lógica de tu command hace uso intensivo de la CPU o incluso en operaciones I/O, querrás utilizar `CreateFromObservable` o `CreateFromTask`:
 
 ```cs
-// here we're using observables to model asynchrony
+// Aquí utilizamos observable para modelar asíncrono
 var command1 = ReactiveCommand.CreateFromObservable(() => Observable.Return(Unit.Default).Delay(TimeSpan.FromSeconds(3)));
 
-// here we're using the TPL to model asynchrony
+// Aquí ustilizamos TPL para modelar asíncrono
 var command2 = ReactiveCommand.CreateFromTask(async () =>
     {
         await Task.Delay(TimeSpan.FromSeconds(3)); 
     });
 ```
 
-Again, several overloads exist for commands taking parameters and returning values.
+De nuevo, muchas de las opciones disponibles para commands reciben y devuelven parámetros.
 
-Regardless of whether your command is synchronous or asynchronous in nature, you execute it via the `Execute` method. You get back an observable that will tick the command's result value when execution completes. Synchronous commands will execute _immediately_, so the observable you get back will already have completed. The returned observable is behavioral though, so subscribing after the fact will still tick through the result value.
+Independientemente de si tu command es de naturaleza síncrona o asíncrona, lo ejecutas con el método `Execute`. Recibes un observable haciendo que el command emita señales cuando termine su ejecución. Los commands síncronos se ejecutarán inmediatamente, y recibirás el observable cuando la ejecución haya sido completada. El observable devuelto es conductual, por lo que la subscripción a su finalización marcará el resultado final.
 
-> **Warning** As is often the case with idiomatic Rx, the observable returned by `Execute` is cold. That is, nothing will happen unless something subscribes to it. This subscription is often instigated by the binding infrastructure. But in those cases where you're calling `Execute` directly, it's very important to remember that it's lazy.
+> **Atención** Como suele ser el caso de Rx, el observable devuelto por `Execute` es frío. Esto es, no ocurrirá nada a menos que te subscribas al command. Esta subscripción a menudo es instigada por la infraestructura de Binding. Pero en esos caso donde estás llamado directamente a `Execute`, es muy importante recordar que esto es perezoso.
 
 
 

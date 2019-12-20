@@ -1,9 +1,9 @@
 # Thrown Exceptions
 
-## Root Cause
+## Caso base
 http://stackoverflow.com/questions/26219105/what-is-the-reactiveui-way-to-handle-exceptions-when-executing-inferior-reactive
 
-### Question
+### Pregunta
 
     var reactiveCommandA = ReactiveCommand.CreateAsyncTask(_ => CanPossiblyThrowAsync());
     reactiveCommandA.ThrownExceptions
@@ -26,20 +26,20 @@ http://stackoverflow.com/questions/26219105/what-is-the-reactiveui-way-to-handle
     reactiveCommandC.ThrownExceptions
                     .Subscribe(ex => UserError.Throw("Oh no C", ex));
 
-So assume my background implementation for reactiveCommandA might throw an exception. That is OK, since I have subscribed to .ThrownExceptions and will theoretically notify the user and retry/fail/abort (not shown here for brevity). So it will not bubble up to the dispatcher.
+Asumiendo que la implementación en background para reactiveCommandA debería lanzar una excepción, Esto está bien, ya que me he suscrito a .ThrownExecptions y teóricamente se notificará al usuario el reintento/fallo/cancelación (no se muestra por brevedad). No es lanzado al dispatcher.
 
-So that is great when reactiveCommandA is executed by itself. However, I have reactiveCommandC which executes reactiveCommandA and reactiveCommandB. I also subscribe to its .ThrownExceptions. The problem I'm running into is that if I execute reactiveCommandC and reactiveCommandA implementation throws within it, it also causes reactiveCommandC to blow up. Then I'm notifying the user twice for the same root error becuase reactiveCommandA does its .ThrownExceptions thing, then reactiveCommandC does its .ThrownExceptions thing.
+Esto está bien cuando reactiveCommandA es ejecutado por si mismo. Sin embargo, tengo reactiveCommandC, el cual ejecuta reactiveCommandA y reactiveCommandB. También me he suscrito a .ThrownExceptions. El problema es que estoy ejecutando dentro y que al ejecutar las implementaciones de reactiveCommandC y reactiveCommandA también causa error en reactiveCommandC. Entonces estoy notificando al usuario dos veces por el mismo error, porque reactiveCommandA también hace sus cosas en .ThrownExceptions y lo mismo para reactiveCommandC.
 
-So is there a standard approach to this type of situation? Preferably something somewhat elegant, since I find the existing code fairly clean and I don't want to clutter things up or introduce spaghetti.
+Hay alguna aproximación estandard para este tipo de situaciones? Preferiblemente algo elegante, ya que he encontrado código bastante limpio y no quiero meter código spaghetti.
 
-Things I have thought of:
+Cosas que he pensado:
 
+* Rodear la línea de "await..." con un bloque try/catch y capturando las excepciones. Parece feo si tengo que hacerlo a menudo.
+* Utiliza await reactiveCommandA.ExecuteAsync().Catch(Observable.Never<Unit>()); aunque creo que eso causará que reactiveCommandC nunca se complete so no puede ser ejecutado de nuevo.
 
-* Surrounding the "await..." line with try/catch block and swallowing exception and exiting. Seems ugly if I have to do it a lot.
-* Using await reactiveCommandA.ExecuteAsync().Catch(Observable.Never<Unit>()); although I think this will cause reactiveCommandC to never complete so it can never execute again.
-* Using the same approach with the .Catch() method but returning a boolean based on whether I made it through successfully or not (e.g. .Catch(Observable.Return(false)). Would still have to check if we could continue between each await statement.
+* Utilizando la misma aproximación con el método .Catch() pero devolciendo un bool basado en si la ejecución fue completada satisfactoriamente o no (e.g. .Catch(Observable.Return(false))). Tendría que seguir comprobando si podemos continuar en cada paso por await.
 
-### Solution:
+### Solución:
 
     Observable.Merge(rxCmdA.ThrownExceptions, rxCmdB.ThrownExceptions, rxCmdC.ThrownExceptions)
         .Throttle(TimeSpan.FromMilliseconds(250), RxApp.MainThreadScheduler)

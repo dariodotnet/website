@@ -1,32 +1,31 @@
 # Command Values
 
-The execution of a command produces a value, which is captured as `TResult` in `ReactiveCommand<TParam, TResult>`. If you don't need to return anything special, you can just use `Unit` for `TResult`. Indeed, this is what will happen automatically if you use `Create*` overloads that don't return values:
+La ejecución de un command produce un valor, que es capturado como `TResult` en `ReactiveCommand<TParam, TResult>`. Si no necesitas devolver nada especial, puedes utilizar `Unit` para `TResult`. En efecto, esto sucederá automáticamente si utilizas alguna sobrecarga del método `Create*` que no devuelva valor:
 
 ```cs
-// a synchronous command that does not return an interesting result
+// un command síncrono que no devuelve un valor
 var command1 = ReactiveCommand.Create(() => { });
 
-// an observable-based asynchronous command that does not return an interesting result
+// un command asíncrono basado en observable que no devuelve un valor 
 var command2 = ReactiveCommand.CreateFromObservable(() => Observable.Return(Unit.Default));
 
-// a Task-based asynchronous command that does not return an interesting result
+// un command asíncrono basado en task que no devuelve un valor
 var command3 = ReactiveCommand.CreateFromTask(async () => await Task.Delay(TimeSpan.FromSeconds(2)));
 ```
 
-All the above commands are of type `ReactiveCommand<Unit, Unit>`. Note that `CreateFromObservable` is required to eventually return an `IObservable<T>`, so `T` must be known. Therefore, to get a `ReactiveCommand<Unit, Unit>` from `CreateFromObservable`, you must ensure your observable is of type `IObservable<Unit>`.
+Todos los commands de arriba son de tipo `ReactiveCommand<Unit, Unit>`. Nota que `CreateFromObservable` es necesario que eventualmente devuelva un `IObservable<T>`, por lo que `T` debe ser conocido. Por lo tanto, para crear un `ReactiveCommand<Unit, Unit>` utilizando `CreateFromObservable`, debes asegurarte que tu observable es de tipo `IObservable<Unit>`.
 
-If you _do_ want to return something interesting each time your command executes, you need only use the appropriate `Create*` method:
+Si tu _quieres_ devolver algo cada vez que tu command se ejecuta, sólo necesitas utilizar el método `Create*` apropiado:
 
 ```cs
-// a synchronous command that always returns 42 upon execution
+// un command síncrono que siempre devuelve 42 tras la ajecución
 var command1 = ReactiveCommand.Create(() => 42);
 
-// an observable-based asynchronous command that always returns 42 upon execution
+// un command asíncrono basado en observable que siempre devuelve 42 tras la ajecución
 var command2 = ReactiveCommand.CreateFromObservable(() => Observable.Return(42));
 
-// a Task-based asynchronous command that always returns 42 upon execution
+// un command asíncrono basado en Task que siempre devuelve 42 tras la ajecución
 var command3 = ReactiveCommand.CreateFromTask(() => Task.FromResult(42));
 ```
 
-Here, all commands are of type `ReactiveCommand<Unit, int>`. Subscribing to the observable return by `Execute` will tick through the value `42`.
-
+Aquí, todos los commands son de tipo `ReactiveCommand<Unit, int>`. Subscribiéndos al observable devuelto por `Execute` emitirá el valor `42`.

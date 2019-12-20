@@ -1,11 +1,11 @@
-## Command Errors
+## Command errores
 
-If the logic you provide to a `ReactiveCommand` can fail in expected ways, you need a means of dealing with those failures.
+Si la lógica provista para tu `ReactiveCommand` puede fallar en algún punto, necesitar tratar con los posible errores.
 
-For command execution, the pipeline you get back from `Execute` will tick any errors that occur in your execution logic. However, the subscription to this observable is often instigated by the binding infrastructure. As such, it's likely that you cannot even get a hold of the observable to observe any errors.
+Para la ejecución del command, el flujo que recibes desde `Execute` emitirá algunos errores que ocurran en tu lógica de ejecución. Sin embargo, la subscripción a este observable es a menudo inducida por la infraestructura de binding. Por lo tanto, es posible que no puedas recibir errores al observar la ejecución.
 
-To address this dilemma, `ReactiveCommand` includes a `ThrownExceptions` observable (of type `IObservable<Exception>`). Any errors that occur in your execution logic will *also* tick through this observable. If you haven't subscribed to it, ReactiveUI will bring down your application. This forces you towards a pit of error-handling success.
+Para este dilema, `ReactiveCommand` incluye el observable `ThrownExceptions` (de tipo `IObservable<Exception>`). Cualquie error que ocurra durante la ejecución la lógica *también* emitirá este observable. Si no tienes una subscripción a éste, ReactiveUI te tirará tu aplicación. Esto te fuerza a crear un manejo de errores consistente.
 
-It can be tempting to *always* add a subscription to `ThrownExceptions`, even if the only recourse is to just log the problem. However, it is advisable to treat this like any other exception handling and only handle problems you can redress. If, for example, your command merely updates a property in your view model and it should never fail, any subscription to `ThrownExceptions` will serve only to obscure implementation problems. That said, be aware of the potential for intermittent problems, such as network and I/O errors. As always, a strong suite of tests will help you identify where a subscription to `ThrownExceptions` makes sense.
+Puede ser tentador añadir *siempre* una subscripción a `ThrownExceptions`, incluso si el único recurso es hacer log del problema. Sin embargo, puede ser interante tratar esto como otra estrategia para manejar excepciones cuando tengas una compensación. Si, por ejemplo, tu command sólo actualiza una propiedad de tu ViewMode y nunca debería fallar, una subscripción a `ThrownExceptions` sólo servirá para ocultar problemas de implementación. Dicho esto, ten cuidad con problemas intermitentes, como los errores de acceso a red o archivos. Como siempre, una buena cobertura de pruebas te ayudará a identificar cuando una subscripción a `ThrownExceptions` tiene sentido.
 
-> **Note** Your `canExecute` pipeline also has the potential to produce an error. Such cases are almost certainly a programmer error because you never want your `canExecute` pipeline to end in error. Even so, these errors will also tick through `ThrownExceptions`.
+> **Nota** Tu flojo para controlar `canExecute` también tiene potencial para producir un error. Este tipo de casos suelen ser errores de programador, ya que no quieres un flujo para controlar el flujo de `canExecute` acabe en error. A pesar de esto, estos errores también se emitirán a través de `ThownExceptions`.

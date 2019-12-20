@@ -1,41 +1,26 @@
-# Asynchronous operations
+# Operaciones asíncronas
 
-# Asynchronous operations with ReactiveCommand
+# Operaciones asíncronas con ReactiveCommand
 
-One of the most important features of ReactiveCommand is its built-in
-facilities for orchestrating asynchronous operations. In previous versions of
-ReactiveUI, this was in a separate command class, but starting with ReactiveUI
-5.0, this is built-in.
+Una de las características más importante de ReactiveCommand es que está contruido para facilitar y orquestar las operaciones asíncronas. En versiones anteriores de ReactiveUI, era en una clase Command separada, pero a partir de la versión 5.0 ya forma parte de éste.
 
-### Commands and CreateAsyncXYZ
+### Commands y CreateAsyncXYZ
 
-To use ReactiveCommand with async operations, create your Command via the
-`CreateAsync` family of methods
+Para utilizar ReactiveCommand con operaciones asíncronas, crea tu Command utilizando la familia de métodos `CreateASync`
 
-* **Create** - Create a standard ReactiveCommand
-* **CreateAsyncObservable** - Creates a command whose a async method returns
-  `IObservable<T>`
-* **CreateAsyncTask** - Create a command whose async method returns `Task` or
-  `Task<T>`; use this method if you want to write a method with `async/await`.
+* **Create** - Crea un ReactiveCommand estándard
+* **CreateAsyncObservable** - Crea un Command que devuelve un métdo asíncrono `IObservable<T>`
+* **CreateAsyncTask** - Crea un Command que devuelve un métod asíncrono `Task` o `Task<T>`; utiliza este método si quieres escribir un método con `async/await`.
 
-All of these methods will parameterize the resulting ReactiveCommand to be the
-return result of the method (i.e. if your async method returns `Task<String>`,
-your Command will be `ReactiveCommand<String>`). This means, that Subscribing
-to the Command itself returns the results of the async method as an
-Observable.
+Todos estos métodos parametrizarán el resultado que ReactiveCommand devolverá al ser ejecutado (i.e si tu método asíncrono devuelce `Task<String>`, to Comman será `ReactiveCommand<String>`). Esto siginifica que nuestra subscripción al Command devolcerá un método asíncrono como un Observable.]
 
-ReactiveCommand itself doesn't guarantee that its results will be delivered
-on the UI thread, so extra `ObserveOn`s may be necessary.
+ReactiveCommand por si mismo no garantiza que el resultado será devuelto en el hilo de nuestra UI, por lo que puede ser necesario utilizar `ObserveOn`.
 
-It is important to know, that ReactiveCommand itself as an `IObservable` will
-never complete or OnError - errors that happen in the async method will
-instead show up on the `ThrownExceptions` property.
+Es importante saber que ReactiveCommand es en si mismo in `IObservable` que nunca devolverá complete o OnError - los errores que ocurran en un método asíncrono serán capturados a través de la propiedad `ThrownExceptions`.
 
-If it is possible that your async method can throw an exception (and most
-can!), you **must** Subscribe to `ThrownExceptions` or the exception will be
-rethrown on the UI thread.
+Es posible que tus métodos asíncronos puedan lanzar una excepción (la mayoría pueden!), por lo que **debes** subscribirete a `ThrownExceptions1 o la excepción será relanzada en el hilo de la UI.
 
-Here's a simple example:
+Aquí un ejemplo simple:
 
 ```cs
 LoadUsersAndAvatars = ReactiveCommand.CreateAsyncTask(async _ => {
@@ -54,9 +39,9 @@ LoadUsersAndAvatars.ThrownExceptions
     .Subscribe(ex => this.Log().WarnException("Failed to load users", ex));
 ```
 
-### How can I execute the command?
+### Cómo puedo ejectuar un Command?
 
-The best way to execute ReactiveCommands is via the `ExecuteAsync` method:
+El mejor camino para ejecutar ReactiveCommand es via método `ExecuteAsync`:
 
 ```cs
 LoadUsersAndAvatars = ReactiveCommand.CreateAsyncTask(async _ => {
@@ -73,17 +58,13 @@ var results = await LoadUsersAndAvatars.ExecuteAsync();
 Console.WriteLine("You've got {0} users!", results.Count());
 ```
 
-It is important that you **must await ExecuteAsync** or else it doesn't do
-anything! `ExecuteAsync` returns a *Cold Observable*, which means that it only
-does work once someone Subscribes to it.
+Es muy importante utilizar **await ExecuteAsync** o sino ho hacer nada! `ExecuteAsync` devuelve un *Cold Observable*, lo que significa que sólo una vez cuando te subscribes a él.
 
-For legacy code and for binding to UI frameworks, the Execute method is still
-provided.
+Para el legacy code y para el binding de nuestros framewors de UI, el método Execute siguen funcionando.
 
-### Why CreateAsyncTask?
+### Porqué CreateAsyncTask?
 
-Since ReactiveCommand itself is an Observable, it's quite easy to invoke async
-actions based on a ReactiveCommand. Something like:
+Sabiendo que ReactiveCommand es un Observable en si mismo, es fácil invocar acciones asíncronas basadas en un ReactiveCommand. Algo así:
 
 ```cs
 searchButton
@@ -92,26 +73,19 @@ searchButton
     .ToProperty(this, x => x.SearchResults, out searchResults);
 ```
 
-However, while this pattern is approachable if you're handy with Rx, one thing
-that ends up being Difficult™ is to disable the Command itself when the search
-is running (i.e. to prevent more than one search from running at the same
-time). `CreateAsyncTask` does the work to make this happen for you.
+Sin embargo, cuando un utilizas un patrón de la mano de Rx, algo que finalmente se complicará es la desactivación del Command en si cuando la búsqueda esta en marcha (i.e. prevenir más de una búsqueda simultánea). `CreateAsyncTask` hace que esto funcione por ti.
 
-Another difficult aspect of this code is that it can't handle exceptions - if
-`executeSearch` ever fails once, it will never signal again because of the Rx
-Contract. ReactiveCommand handles marshaling exceptions to the
-`ThrownExceptions` property, which can be handled.
+Otra dificultad en este sentido es que no se pueden manejar excepciones - si `executeSearch` falla una vez, nunca volverá a devolver nada más por el Rx Contract. ReactiveCommand redirige las excepciones a la propiedad `ThrownExceptions`, la cual puede ser manejada.
 
 ### Common Patterns
 
-This example from UserError also illustrates the canonical usage of
-CreateAsyncTask:
+Este ejemplo de UserError nos ilustra como es el uso canónico de CreateAsyncTask:
 
 ```cs
 
-// When LoadTweetsCommand is invoked, LoadTweets will be run in the
-// background, the result will be Observed on the Main thread, and
-// ToProperty will then store it in an Output Property
+// Cuando LoadTweetsCommand es invocado, LoadTweets se ejecutará en
+// background, el resultado será observado en el hilo de nuestra UI y 
+// ToProperty la pondrá como resultado en una propiedad
 LoadTweetsCommand = ReactiveCommand.CreateAsyncTask(() => LoadTweets())
 
 LoadTweetsCommand.ToProperty(this, x => x.TheTweets, out theTweets);
@@ -119,8 +93,8 @@ LoadTweetsCommand.ToProperty(this, x => x.TheTweets, out theTweets);
 var errorMessage = "The Tweets could not be loaded";
 var errorResolution = "Check your Internet connection";
 
-// Any exceptions thrown by LoadTweets will end up being
-// sent through ThrownExceptions
+// Cualquier excepción lanzada por LoadTweets finalizarán 
+// enviando a través de ThrowExceptions
 LoadTweetsCommand.ThrownExceptions
     .Select(ex => new UserError(errorMessage, errorResolution))
     .Subscribe(x => UserError.Throw(x));

@@ -1,6 +1,6 @@
-# Invoking Commands
+# Invocando Commands
 
-At times it can be convenient to execute a command in response to some observable that isn't perhaps tied to a user interaction. For example, a feature that automatically saves the current document by executing a `SaveCommand` every 5 minutes. The `InvokeCommand` extension makes it easy to achieve this:
+Aveces puede ser conveniente ejecutar un command en respuesta a algún observable que no está atada una interacción por parte del usuario. Por ejemplo, una característica que automáticamente guarda el documento actual ejecutando `SaveCommand` cada 5 minutos. La extensión `InvokeCommand` hace que esto sea sencillo de conseguir:
 
 ```cs
 var interval = TimeSpan.FromMinutes(5);
@@ -9,4 +9,4 @@ Observable
     .InvokeCommand(this.ViewModel, x => x.SaveCommand);
 ```
 
-> **Hint** `InvokeCommand` respects the command's executability. That is, if the command's `CanExecute` method returns `false`, `InvokeCommand` will not execute the command when the source observable ticks.
+> **Sugerencia** `InvokeCommamnd` respeta el `CanExecute` del command. Esto es, si el método `CanExecute` devuelve `false`, `InvokeCommand` no ejecutará el command durante esa emisión del observable.

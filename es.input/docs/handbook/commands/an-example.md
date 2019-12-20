@@ -28,8 +28,8 @@ public class LoginViewModel : ReactiveObject
 
     public ReactiveCommand<Unit, Unit> LoginCommand => this.loginCommand;
 
-    // note that if no client code requires the full API of the generic ReactiveCommand<TParam, TResult>,
-    // we can just declare the type as ReactiveCommand
+    // Nota que el cliente no requiere de la API completa o el genérico ReactiveCommand<TParam, TResult>,
+    // podemos declarar el tipo como ReactiveCommand
     public ReactiveCommand ResetCommand => this.resetCommand;
 
     public string UserName
@@ -44,7 +44,7 @@ public class LoginViewModel : ReactiveObject
         set { this.RaiseAndSetIfChanged(ref this.password, value); }
     }
 
-    // here we simulate logins by randomly passing/failing
+    // aquí simulamos un login aleatorio correcto/fallando
     private IObservable<Unit> LoginAsync() =>
         Observable
             .Return(new Random().Next(0, 2) == 1)

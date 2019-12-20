@@ -1,8 +1,8 @@
-# Controlling Executability
+# Controlando CanExecute
 
-Reactive commands automatically become unavailable whilst they're executing. That is, their `CanExecute` observable will tick `false` when execution commences, and then `true` once execution completes. However, there are times you will want to further control a command's executability. For example, you might want a login command to become disabled until the user has entered both a user name and a password.
+`ReactiveCommand` automáticamente pasa a no disponible cuando se está ejecutando. Esto es, el observable `CanExecute` emitirá `false` cuando comience su ejecución y `true` cuando la ejecución se complete. Sin embargo, hay momentos que querrás tomar el control de la ejecutabilidad de tus commands. Por ejemplo, quieres que tu command de login se deshabilite hasta que el usuario haya introducido los datos de nombre y contraseña.
 
-To do this, you can pass in an `IObservable<bool>` for the `canExecute` parameter when you create the command:
+Para hacer esto, puedes pasar un `IObservable<bool>` como parámetro `canExecute` al crear el command:
 
 ```cs
 var canExecute = this
@@ -13,6 +13,6 @@ var canExecute = this
 var command = ReactiveCommand.CreateFromObservable(this.LogOnAsync, canExecute);
 ```
 
-Here, `command` has additional constraints on its executability. Namely, both `UserName` and `Password` must be provided. Of course, `command` is still unavailable during execution of `LogOnAsync`, even if `UserName` and `Password` are both currently valid. In other words, `canExecute` *supplements* the default executability behavior; it doesn't replace it.
+Aquí, `command` tiene una restricción de ejecución adicional. A saber, ambos `UserName` y `Password` deben ser provistos. Por supuesto, `command` no permanece disponible durante la ejecución de `LogOnAsync`, incluso si `UserName` y `Password` son válidos actualmente. En otras palabras, los *suplementos* para el comportamiento de `canExecute`; no reemplazan el comportamiento por defecto.
 
-> **Warning** For performance reasons, `ReactiveCommand` does not marshal your `canExecute` observable to the main scheduler. You almost certainly want your `canExecute` observable to be ticking on the main thread, so be sure to add a call to `ObserveOn` if necessary.
+> **Atención** Por razones de rendimiento, no observes el parámetro encargado de `canExecute` de tu `ReactiveCommand` en el main thread. Tal vez quieras observar las emisiones del observable encargado de `canExecute` en el main thread, así que asegúrate de añadir una llamada a `ObserveOn` si es necesario.

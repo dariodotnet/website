@@ -1,20 +1,20 @@
-# Controlling Scheduling
+# Controlando Scheduling
 
-By default, `ReactiveCommand` uses `RxApp.MainThreadScheduler` to surface events. That is, values from `CanExecute`, `IsExecuting`, `ThrownExceptions`, and result values from the command itself. Typically UI components are subscribed to these observables, so it's a sensible default. However, when writing unit tests for your view models, you may want more control over scheduling.
+Por defecto, `ReactiveCommand` utiliza `RxApp.MainThreadScheduler` para elevar los events. Esto es, los valores emitidos para `CanExecute`, `IsExecuting`, `ThrownExceptions`, y el propio resultado del command. Típicamente, los componentes de la UI están suscritos a estos observables, esto es sensible por defecto. Sin embargo, cuando escribies pruebas unitarias para tus ViewModels, debes querer más controls sobre el scheduling.
 
-> **Warning** It's important to understand that the execution logic for a reactive command is *not* scheduled to execute on the provided scheduler (just as is the case for any `canExecute` observable you provide). Instead, it is left to the caller to implement any required scheduling inside their execution pipeline. This means it is entirely possible for your execution logic to execute on a thread other than that owned by the provided scheduler:
+> **Atención** Es importante entender que la lógica de ejecución para un `ReactiveCommand` *no* es ejecutada en el scheduler provisto (es como el caso del observable provisto para `canExecute`). En su lugar, permite al método que lo llama implementar un scheduler requerido dentro del flujo de ejecución. Esto significa que es totalmente posible ejecutar tu lógica en un hilo distinto al propuesto por el propietario del scheduler:
 >
 > ```cs
 > var command = ReactiveCommand.Create(() => Console.WriteLine(Environment.CurrentManagedThreadId), outputScheduler: RxApp.MainThreadScheduler);
 >
-> // this will output the ID of the thread from which you make this call, not necessarily the ID of the main thread!
+> // esto mostrará el ID del hilo desde el que se hace la llamada, no necesariamente el ID del main thread
 > command.Execute().Subscribe();
 > ```
 
-All `Create*` methods take an optional `outputScheduler` parameter, so you can pass in a custom scheduler if you need to:
+Todos los métodos `Create*` tiene un parámetro opcional `outputScheduler`, que puedes pasar un scheduler si lo necesitas:
 
 ```cs
 var command = ReactiveCommand.Create(() => {}, outputScheduler: someScheduler);
 ```
 
-> **Note** If you're using ReactiveUI's `With` extension method in your tests, you can create commands using the default scheduling behavior. That's because the `With` extension method will switch out `RxApp.MainThreadScheduler` with the scheduler you provide it.
+> **Nota** Si estás utilizando el método de extensión `With` de ReactiveUI en tus pruebas, puedes crear commands utilizando el comportamiento del scheuling por defecto. Esto es porque el método de extensión `With` cambiará el scheduler que proveas a `RxApp.MainThreadScheduler`.

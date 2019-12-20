@@ -1,25 +1,25 @@
-## Canceling
+## Cancelando
 
-If your command's execution logic can take a long time to complete, it can be useful to allow the execution to be canceled. This cancellation support can be used internally by your view models, or exposed so that users have a say in the matter.
+Si la lógica de tus commands toma mucho tiempo en ejecutarse, puede ser muy útil permiter que se cancele la ejecución. Este soporte a la cancelación puede ser utilizada internamente por tu ViewModel, o expuesta para que el usuario pueda decidir.
 
-### Basic Cancelation
+### Cancelación básica
 
-At its most primitive form, canceling a command's execution involves disposing the execution subscription:
+El modo más primitivo para cancelar la ejecución de un command, es haciendo un dispose de la subscripción:
 
 ```cs
 var subscription = someReactiveCommand
     .Execute()
     .Subscribe();
 
-// this cancels the command's execution
+// esto cancela la ejecución del command
 subscription.Dispose();
 ```
 
-However, this requires you to obtain, and keep a hold of the subscription. If you're using bindings to execute your commands you won't have access to the subscription.
+Sin embargo, esto requiere que obtengas y retengas la subscripción. Si estás utilizando bindings para ejecutar tus commands, no tienes acceso a la subscripción.
 
-### Canceling via Another Observable
+### Cancelando via otro observable
 
-Rx itself has intrinsic support for canceling one observable when another observable ticks. It provides this via the `TakeUntil` operator:
+Rx en si mismo tiene soporte para cancelar un observable cuando otro observable emite una señal. Esto se provee a través del operador `TakeUntil`:
 
 ```cs
 var cancel = new Subject<Unit>();
@@ -30,14 +30,14 @@ var command = ReactiveCommand
             .Delay(TimeSpan.FromSeconds(3))
             .TakeUntil(cancel));
 
-// somewhere else
+// en algún otro lugar
 command.Execute().Subscribe();
 
-// this cancels the above execution
+// esto cancela la ejecución de arriba
 cancel.OnNext(Unit.Default);
 ```
 
-Of course, you wouldn't normally create a subject specifically for cancellation. Normally you already have some other observable that you want to use as a cancellation signal. An obvious example is having one command cancel another:
+Por supuesto, normalmente no querrás crear un subject específicamente para la cancelación. Normalmente tendrás algun otro observable que querrás utilizar como señal para cancelar. Un ejemplo obvio es tener un command que cancela a otro:
 
 ```cs
 public class SomeViewModel : ReactiveObject
@@ -69,15 +69,15 @@ public class SomeViewModel : ReactiveObject
 }
 ```
 
-Here we have a view model with a command, `CancelableCommand`, that can be canceled by executing another command, `CancelCommand`. Notice how `CancelCommand` can only be executed when `CancelableCommand` is executing.
+Aquí tenemos un ViewModel con un command, `CancelableCommand`, que puede ser cancelado al ejecutar otro command, `CancelCommand`. Revisa como `CancelCommand` sólo puede ser ejecutado cuando `CancelableCommand` se está ejecutando.
 
-> **Note** At first glance there may appear to be an irresolvable circular dependency between `CancelableCommand` and `CancelCommand`. However, note that `CancelableCommand` does not need to resolve its execution pipeline until it is executed. So as long as `CancelCommand` exists before `CancelableCommand` is executed, the circular dependency is resolved.
+> **Nota** a primera vista puede parecer que tenemos una depedencia circular irresoluble entre `CancelableCommand` y `CancelCommand`. Sin embargo, fíjate que `CancelableCommand` no necesita resolver su flujo hasta que está en ejecución. Como `CancelCommand` existe antes que `CancelableCommand` es ejecutado, la dependencia circular está resuelta.
 
-### Cancellation with the Task Parallel Library
+### Cancelación utilizando Task Parallel Library
 
-Cancellation in the TPL is handled with `CancellationToken` and `CancellationTokenSource`. Rx operators that provide TPL integration will normally have overloads that will pass you a `CancellationToken` with which to create your `Task`. The idea of these overloads is that the `CancellationToken` you receive will be canceled if the subscription is disposed. So you should pass the token through to all relevant asynchronous operations. `ReactiveCommand` provides similar overloads for `CreateFromTask`.
+La cancelación en TPL es manejada con `CancellationToken` y `CancellationTokenSource`. Los operadores de Rx proveen ingración con TPL y te permitirán utilizar las sobrecargas para pasar un `CancellationToken` con el que crear tu `Task`. La idea de esta sobrecarga es que el `CancellationTOken` recibirá cancelado si haces dispose de la subscripción. Deberías pasa el token para todas las operaciones asíncronas relevantes. `ReactiveCommand` te provee de sobrecarcas similares para `CreateFromTask`.
 
-Consider the following example:
+Considera el siguiente ejemplo:
 
 ```cs
 public class SomeViewModel : ReactiveObject
@@ -102,13 +102,13 @@ public class SomeViewModel : ReactiveObject
 }
 ```
 
-There are several important things to note here:
+Hay muchas cosas importantes en las que fijarse aquí:
 
-1. Our `DoSomethingAsync` method takes a `CancellationToken`
-2. This token is passed through to `Task.Delay` so that the delay will end early if the token is canceled.
-3. We use an appropriate overload of `CreateFromTask` so that we have a token to pass through to `DoSomethingAsync`. This token will be automatically canceled if the execution subscription is disposed.
+1. Nuestro métodp `DoSomethingAsync` recibe un `CancellationToken`
+2. Este token es pasado a su vez a `Task.Delay`, y hará que el delay termine si el token es cancelado.
+3. Utilizamos una sobrecarga apropiada de `CreateFromTask` que tiene un token como parámetro parar pasarlo a `DoSomethingAsync`. Este token cancelará automáticamente si hacemos dispose a la subscripción de la ejecución.
 
-The above code allows us to do something like this:
+El código de arriba nos permite hacer algo así:
 
 ```cs
 var subscription = viewModel
@@ -116,13 +116,13 @@ var subscription = viewModel
     .Execute()
     .Subscribe();
 
-// this cancels the execution
+// esto cancela la subscripción
 subscription.Dispose();
 ```
 
-But what if we want to cancel the execution based on an external factor, just as we did with observables? Since we only have access to the `CancellationToken` and not the `CancellationTokenSource`, it's not immediately obvious how we can achieve this.
+Pero que pasa si queremos cancelar la ejecución basándonos en un factor externo, como hicimos con observables? Como sólo tenemos acceso al `CancellationToken` y no al `CancellationTokenSource`, esto no es tan obvio de conseguir.
 
-Besides forgoing TPL completely \(which is recommended if possible, but not always practical\), there are actually quite a few ways to achieve this. Perhaps the easiest is to use `CreateFromObservable` instead:
+Además de renunciar completamente a TPL \(lo cual es remendado si es posible, pero no siempre lo más prácticao\), tenemos algunos caminos para conseguirlo. Quizás el camino más sencillo es utilizar `CreateFromObservable` en su lugar:
 
 ```cs
 public class SomeViewModel : ReactiveObject
@@ -158,5 +158,5 @@ public class SomeViewModel : ReactiveObject
 }
 ```
 
-This approach allows us to use exactly the same technique as with the pure Rx solution discussed above. The difference is that our observable pipeline includes execution of TPL-based asychronous code.
+Esta aproximación nos permite utilizar exactamente la misma técnica como Rx puro discutido arriba. La diferencia es que nuestro flujo de ejecución incluye código basado en TPL asíncrono.
 
